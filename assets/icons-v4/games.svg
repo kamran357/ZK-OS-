@@ -1,0 +1,26 @@
+<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <path d="M76 92
+           C46 92 22 116 20 146
+           L16 186
+           C14 208 34 226 55 219
+           L64 216
+           C74 213 82 206 87 196
+           L94 182
+           L162 182
+           L169 196
+           C174 206 182 213 192 216
+           L201 219
+           C222 226 242 208 240 186
+           L236 146
+           C234 116 210 92 180 92
+           Z"
+        fill="#c7f36b" stroke="#17131b" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="60" y="128" width="18" height="48" rx="3" fill="#17131b"/>
+  <rect x="45" y="143" width="48" height="18" rx="3" fill="#17131b"/>
+  <circle cx="196" cy="126" r="13" fill="#17131b"/>
+  <circle cx="220" cy="150" r="13" fill="#17131b"/>
+  <circle cx="196" cy="174" r="13" fill="#17131b"/>
+  <circle cx="172" cy="150" r="13" fill="#17131b"/>
+  <rect x="100" y="108" width="20" height="10" rx="2" fill="#fff8dc" stroke="#17131b" stroke-width="6"/>
+  <rect x="136" y="108" width="20" height="10" rx="2" fill="#fff8dc" stroke="#17131b" stroke-width="6"/>
+</svg>

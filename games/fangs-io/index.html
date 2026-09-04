@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<title>Fangs.io — Snake Battle Arena | Free .io Game</title>
+<meta name="description" content="Fangs.io is a free browser .io game: grow your snake, grab weapons and power-ups, and blast rivals in a giant free-for-all arena. No download, play instantly." />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%8D%3C/text%3E%3C/svg%3E" />
+<meta property="og:title" content="Fangs.io — Snake Battle Arena" />
+<meta property="og:description" content="Grow. Grab weapons. Blast rivals. A free instant-play .io game." />
+<meta property="og:type" content="website" />
+
+<!-- ============================================================= -->
+<!-- GOOGLE ADSENSE — paste your publisher id and un-comment to go live. -->
+<!-- 1) Get approved at https://adsense.google.com  2) Replace ca-pub-XXXX -->
+<!-- 3) Add /ads.txt with:  google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0 -->
+<!--
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+<!-- ============================================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="menu-open">
+
+<canvas id="game"></canvas>
+<div id="hud" class="hidden"></div>
+
+<!-- Mobile boost button -->
+<button id="boostBtn" aria-label="Boost">BOOST</button>
+
+<!-- ================= MENU / LANDING ================= -->
+<section id="menu">
+  <div class="menu-inner">
+    <!-- top banner ad -->
+    <div class="ad-slot ad-banner" aria-hidden="true">
+      <span class="ad-tag">Advertisement</span>
+      <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="TOP_BANNER_SLOT" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+    </div>
+
+    <div class="hero">
+      <div class="brand">
+        <span class="logo-mark">🐍</span>
+        <h1 class="logo">FANGS<span class="dotio">.io</span></h1>
+      </div>
+      <p class="tagline">Grow your snake. Grab weapons. <b>Blast everyone.</b></p>
+
+      <div class="play-card">
+        <label class="fld-lab" for="nameInput">Your name</label>
+        <input id="nameInput" maxlength="16" placeholder="enter a name" autocomplete="off" />
+
+        <div class="skin-row">
+          <span class="fld-lab">Pick a skin</span>
+          <div class="skins">
+            <button class="skinDot" data-i="0" style="--c:#39ff88"></button>
+            <button class="skinDot" data-i="1" style="--c:#ff5d5d"></button>
+            <button class="skinDot" data-i="2" style="--c:#5db8ff"></button>
+            <button class="skinDot" data-i="3" style="--c:#ffd23f"></button>
+            <button class="skinDot" data-i="4" style="--c:#c77dff"></button>
+            <button class="skinDot" data-i="5" style="--c:#ff9f45"></button>
+            <button class="skinDot" data-i="6" style="--c:#4dfff0"></button>
+            <button class="skinDot" data-i="7" style="--c:#ff6bd6"></button>
+          </div>
+        </div>
+
+        <button id="playBtn" class="play-btn">START</button>
+        <p class="controls">Move with your mouse · hold click or space to boost · weapons auto-fire</p>
+      </div>
+
+      <section class="local-scores" aria-labelledby="scoresTitle">
+        <header><span id="scoresTitle">LOCAL HIGH SCORES</span><small>THIS BROWSER</small></header>
+        <ol id="scoreList"><li><span>NO RUNS YET</span><b>0000</b></li></ol>
+      </section>
+
+      <ul class="how">
+        <li><b>Eat</b> glowing orbs to grow longer.</li>
+        <li><b>Grab</b> weapons &amp; ⚡ power crates off the ground.</li>
+        <li><b>Ram</b> your head into a rival's body to make them explode into food.</li>
+      </ul>
+    </div>
+
+    <!-- side box ad -->
+    <aside class="ad-slot ad-box" aria-hidden="true">
+      <span class="ad-tag">Advertisement</span>
+      <!-- <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="SIDE_BOX_SLOT"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+    </aside>
+  </div>
+
+  <footer class="menu-foot">
+    <span>Fangs<b>.io</b> — a free browser game.</span>
+    <span class="foot-links">No download · Plays instantly · Desktop &amp; mobile</span>
+  </footer>
+</section>
+
+<!-- ================= DEATH SCREEN ================= -->
+<section id="death" class="hidden">
+  <div class="death-card">
+    <h2 id="deathKiller">Eaten</h2>
+    <div class="death-stats">
+      <div><span>LENGTH</span><b id="deathLen">0</b></div>
+      <div><span>KILLS</span><b id="deathKills">0</b></div>
+      <div><span>BEST</span><b id="deathBest">0</b></div>
+    </div>
+    <p id="deathRank" class="death-rank">RUN SAVED TO LOCAL LEADERBOARD</p>
+
+    <!-- interstitial ad (the .io money moment) -->
+    <div class="ad-slot ad-inter" aria-hidden="true">
+      <span class="ad-tag">Advertisement</span>
+      <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="DEATH_INTERSTITIAL_SLOT" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script> -->
+    </div>
+
+    <div class="death-btns">
+      <button id="respawnBtn" class="play-btn">RESPAWN</button>
+      <button id="menuBtn" class="ghost-btn">MENU</button>
+    </div>
+  </div>
+</section>
+
+<!-- boot loader -->
+<div id="boot">Loading Fangs.io…</div>
+
+<script type="module" src="js/game.js"></script>
+</body>
+</html>

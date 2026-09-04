@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+<title>VIPER ARENA</title>
+<link rel="stylesheet" href="style.css?v=3" />
+</head>
+<body>
+  <canvas id="game"></canvas>
+
+  <!-- ===== HUD ===== -->
+  <div id="hud" class="hidden">
+    <div class="hud-top">
+      <div class="hud-block">
+        <div class="hud-label">SCORE</div>
+        <div id="hud-score" class="hud-value">0</div>
+        <div id="hud-player" class="hud-meta">ROOKIE</div>
+      </div>
+      <div class="hud-block hud-center">
+        <div id="hud-mission" class="hud-label">WAVE</div>
+        <div id="hud-wave" class="hud-value">1</div>
+        <div id="hud-combo" class="hud-combo"></div>
+      </div>
+      <div class="hud-block hud-right">
+        <div class="hud-label">CLEARANCE</div>
+        <div id="hud-progress" class="hud-value">0 / 0</div>
+        <div id="hud-enemies" class="hud-meta">0 HOSTILES LIVE</div>
+      </div>
+    </div>
+
+    <div id="wave-banner" class="wave-banner hidden"></div>
+    <div id="boss-meter" class="boss-meter hidden">
+      <div class="boss-meter-line"><span id="boss-name">BOSS</span><span id="boss-hp-text">100%</span></div>
+      <div class="boss-bar"><div id="boss-fill" class="boss-fill"></div></div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="hud-health">
+        <div class="hud-label">VITALS</div>
+        <div class="health-bar"><div id="health-fill" class="health-fill"></div></div>
+        <div id="hud-health-num" class="health-num">100</div>
+        <div id="hud-loadout" class="loadout-chip">OVERDRIVE FINS</div>
+      </div>
+      <div class="hud-weapon">
+        <div id="hud-weapon" class="weapon-name">PISTOL</div>
+        <div id="hud-ammo" class="weapon-ammo">&#8734;</div>
+      </div>
+    </div>
+
+    <canvas id="minimap"></canvas>
+    <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Change sound mode">SOUND · ASMR</button>
+    <div id="touch-controls" class="touch-controls" aria-label="Touch controls">
+      <div class="touch-dpad">
+        <button type="button" data-touch-key="up" aria-label="Move up">↑</button>
+        <button type="button" data-touch-key="left" aria-label="Move left">←</button>
+        <button type="button" data-touch-key="down" aria-label="Move down">↓</button>
+        <button type="button" data-touch-key="right" aria-label="Move right">→</button>
+      </div>
+      <button type="button" class="touch-fire" data-touch-fire aria-label="Fire weapon">FIRE</button>
+    </div>
+  </div>
+
+  <!-- ===== TITLE ===== -->
+  <div id="title" class="overlay">
+    <div class="title-shell">
+      <section class="launch-panel">
+        <p class="eyebrow">RAJ OS // GAME ROOM</p>
+        <h1 class="logo">VIPER<span class="logo-accent">ARENA</span></h1>
+        <p class="tagline">EAT. GROW. ANNIHILATE.</p>
+
+        <label class="username-field" for="username">
+          <span>PILOT NAME</span>
+          <input id="username" name="username" type="text" minlength="2" maxlength="16"
+            autocomplete="nickname" spellcheck="false" placeholder="ENTER CALLSIGN" />
+        </label>
+        <p id="username-error" class="field-error" role="alert"></p>
+
+        <fieldset class="loadout-picker">
+          <legend>SNAKE EQUIPMENT</legend>
+          <button class="loadout-card selected" type="button" data-loadout="overdrive" aria-pressed="true">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 29 17 20 6 11l10 3 8-8v11l10 3-10 3v11l-8-8Z"/></svg>
+            <span><b>OVERDRIVE FINS</b><small>+10% movement · SMG start</small></span>
+          </button>
+          <button class="loadout-card" type="button" data-loadout="bulwark" aria-pressed="false">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 33 9v9c0 9-5 15-13 18C12 33 7 27 7 18V9Z"/><path d="M20 10v19"/></svg>
+            <span><b>BULWARK PLATING</b><small>+40 armour · reduced damage</small></span>
+          </button>
+          <button class="loadout-card" type="button" data-loadout="arc" aria-pressed="false">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="13"/><path d="m22 7-8 14h7l-3 12 9-16h-7Z"/></svg>
+            <span><b>ARC COIL</b><small>Railgun start · volatile core</small></span>
+          </button>
+        </fieldset>
+
+        <div class="sound-picker" role="group" aria-label="Sound mode">
+          <span>SOUND MODE</span>
+          <button type="button" data-sound-mode="asmr" aria-pressed="true">ASMR</button>
+          <button type="button" data-sound-mode="arcade" aria-pressed="false">ARCADE</button>
+          <button type="button" data-sound-mode="mute" aria-pressed="false">MUTE</button>
+        </div>
+
+        <button id="btn-start" class="btn" type="button">ENTER ARENA</button>
+        <div class="controls-hint">
+          <span><b>WASD</b> steer</span>
+          <span><b>MOUSE</b> aim</span>
+          <span><b>CLICK / SPACE</b> fire</span>
+        </div>
+      </section>
+
+      <aside class="leaderboard-panel" aria-labelledby="leaderboard-title">
+        <div class="leaderboard-head">
+          <span>LOCAL ARCHIVE</span>
+          <h2 id="leaderboard-title">HIGH SCORES</h2>
+        </div>
+        <ol id="leaderboard" class="leaderboard-list"></ol>
+        <div class="mission-preview">
+          <span>BOSS PROTOCOLS</span>
+          <p><b>03</b> VENOM TITAN</p>
+          <p><b>06</b> RAIL WYRM</p>
+          <p><b>09</b> INFERNO HYDRA</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===== GAME OVER ===== -->
+  <div id="gameover" class="overlay hidden">
+    <div class="overlay-inner gameover-inner">
+      <p id="final-player" class="eyebrow">PILOT</p>
+      <h1 class="dead">TERMINATED</h1>
+      <p id="death-cause" class="death-cause">KILLED BY THE ARENA</p>
+      <p id="rank-result" class="rank-result">RUN ARCHIVED</p>
+      <div class="final-stats">
+        <div><span class="stat-num" id="final-score">0</span><span class="stat-lbl">SCORE</span></div>
+        <div><span class="stat-num" id="final-wave">0</span><span class="stat-lbl">WAVE</span></div>
+        <div><span class="stat-num" id="final-kills">0</span><span class="stat-lbl">KILLS</span></div>
+      </div>
+      <button id="btn-restart" class="btn" type="button">RETRY LOADOUT</button>
+    </div>
+  </div>
+
+  <script src="sim.js?v=3"></script>
+  <script src="render.js?v=3"></script>
+  <script src="audio.js?v=3"></script>
+  <script src="main.js?v=3"></script>
+</body>
+</html>

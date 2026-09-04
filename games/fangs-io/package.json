@@ -1,0 +1,11 @@
+{
+  "name": "fangs-io",
+  "version": "1.0.0",
+  "description": "Free instant-play top-down snake battle .io game. Client-only, zero-dep.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8123",
+    "prompts": "node tools/build-prompts.mjs"
+  },
+  "license": "MIT"
+}

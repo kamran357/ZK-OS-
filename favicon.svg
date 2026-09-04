@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#f3b1be"/>
+  <rect x="4" y="4" width="56" height="56" rx="4" fill="#17131b"/>
+  <rect x="8" y="8" width="48" height="48" rx="2" fill="#2a1f35"/>
+  <!-- Z letter -->
+  <path d="M14 18h12v4h-7l7 8v4H14v-4h7l-7-8z" fill="#f3b1be"/>
+  <!-- K letter -->
+  <path d="M38 18h4v6h2l4-6h5l-5 7 5 9h-5l-4-7h-2v7h-4z" fill="#f3b1be"/>
+</svg>

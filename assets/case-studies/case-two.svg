@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400">
+  <rect width="640" height="400" fill="#b9dfe8"/>
+  <rect x="0" y="0" width="640" height="400" fill="none" stroke="#17131b" stroke-width="6"/>
+  <text x="40" y="330" font-family="monospace" font-size="120" font-weight="700" fill="#17131b" opacity="0.35">02</text>
+  <text x="40" y="60" font-family="monospace" font-size="20" letter-spacing="2" fill="#17131b">CASE STUDY / ADD YOUR IMAGE HERE</text>
+</svg>

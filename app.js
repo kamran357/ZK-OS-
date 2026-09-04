@@ -1,0 +1,2498 @@
+// Add your own testimonial Shorts/videos here — each needs a real YouTube video id.
+// Example: { id: "dQw4w9WgXcQ", label: "Client Voice 01", type: "Vertical testimonial", duration: "00:39", url: "https://youtube.com/shorts/dQw4w9WgXcQ", story: "One sentence on what the client says." }
+const proofVideos = [
+  { id: "fINAL_TESTIMONAIL", label: "Client Success Story", type: "Testimonial video", duration: "02:30", url: "https://res.cloudinary.com/cjhe3aad/video/upload/v1788521634/fINAL_TESTIMONAIL.mp4", story: "Client shares how Zaid Khan's Voice AI increased their conversion rates by 300%." },
+  { id: "final_Testimonials", label: "Business Transformation", type: "Testimonial video", duration: "02:45", url: "https://res.cloudinary.com/cjhe3aad/video/upload/v1788521573/final_Testimonials.mp4", story: "Business owner explains how automated systems saved 20+ hours weekly." }
+];
+
+// Your case studies. Keep 3-6, each with a real (or honestly-labelled) outcome.
+// Drop a matching image at ./assets/case-studies/{id}.png, or leave it out — the card still renders without one.
+const clientCases = [
+  {
+    id: "case-one",
+    company: "Dr. Dental Network",
+    sector: "Dental Practices & Medical Services",
+    metric: "+$142,000",
+    metricLabel: "in Recovered Revenue",
+    summary: "Implemented an inbound Voice AI Agent to answer missed after-hours calls, booking 89 patient appointments over 90 days.",
+    outcome: "Implemented an inbound Voice AI Agent to answer missed after-hours calls, booking 89 patient appointments over 90 days that otherwise would have gone to voicemail (claimed, not audited).",
+    image: "./assets/case-studies/case-one.svg",
+    color: "#f3aaa8"
+  },
+  {
+    id: "case-two",
+    company: "Horizon HVAC & Home Services",
+    sector: "Field Services & Residential Contracting",
+    metric: "-72%",
+    metricLabel: "Lead Response Time",
+    summary: "Replaced a static contact form with an interactive Website AI Agent and automated voice callback system.",
+    outcome: "Replaced a static contact form with an interactive Website AI Agent and automated voice callback system, cutting response time from 4 hours to 45 seconds and boosting emergency booking rates.",
+    image: "./assets/case-studies/case-two.svg",
+    color: "#b9dfe8"
+  },
+  {
+    id: "case-three",
+    company: "Summit Legal Group",
+    sector: "Legal Services",
+    metric: "410 Hours",
+    metricLabel: "Saved Annually",
+    summary: "Custom Website AI Agent screened website visitors for case eligibility and gathered intake details automatically.",
+    outcome: "Custom Website AI Agent screened website visitors for case eligibility and gathered intake details automatically before routing qualified leads directly to attorneys' calendars (claimed, not audited).",
+    image: "./assets/case-studies/case-three.svg",
+    color: "#c7f36b"
+  }
+];
+
+const caseFileSystem = {
+  name: "Zaid Khan OS",
+  type: "folder",
+  children: [
+    {
+      name: "Case Studies",
+      type: "folder",
+      // this whole tree is built from clientCases above — add/remove folders and .case entries as your real work changes
+      children: [
+        {
+          name: "Selected Work",
+          type: "folder",
+          children: clientCases.map(item => ({ name: `${item.company}.case`, type: "case", caseId: item.id }))
+        },
+        {
+          name: "Notes",
+          type: "folder",
+          children: [
+            { name: "How I Work.read", type: "document", title: "How I Work", copy: "I build Voice AI agents and websites that convert visitors into qualified leads automatically." },
+            { name: "Playbook.read", type: "document", title: "Playbook", copy: "My process: understand the business constraint, build the automation, test with real traffic, then optimize based on data." }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Client Videos",
+      type: "folder",
+      children: proofVideos.map((video, index) => ({
+        name: `${String(index + 1).padStart(2, "0")} — ${video.label}.story`,
+        type: "video",
+        videoId: video.id,
+        title: video.label,
+        copy: video.story,
+        url: video.url
+      }))
+    },
+    {
+      name: "Field Notes",
+      type: "folder",
+      children: [
+        { name: "Voice AI Implementation.article", type: "link", url: "./blog/post-1.html", copy: "How to build production-ready voice agents that handle real customer conversations." },
+        { name: "Website Conversion Optimization.article", type: "link", url: "./blog/post-2.html", copy: "The anatomy of high-converting websites that turn visitors into qualified leads." },
+        { name: "AI Automation Workflows.article", type: "link", url: "./blog/post-3.html", copy: "Building automated systems that save hours of manual work every day." }
+      ]
+    },
+    {
+      name: "Services",
+      type: "folder",
+      children: [
+        { name: "AI Voice Agents.service", type: "document", title: "AI Voice Agents", copy: "Conversation design, telephony, prompts, voice, integrations, testing, analytics, and operational handoff." },
+        { name: "Premium Websites.service", type: "document", title: "Premium Websites", copy: "Distinctive, responsive systems that explain, convert, and remain maintainable after launch." },
+        { name: "AI Consulting.service", type: "document", title: "AI Consulting", copy: "Find the expensive business constraint and turn it into a testable implementation plan." },
+        { name: "Production Deployment.service", type: "document", title: "Production Deployment", copy: "Infrastructure, integrations, failure paths, monitoring, and the final mile from prototype to daily use." }
+      ]
+    }
+  ]
+};
+
+const musicTracks = [
+  { title: "Tomb of Death", artist: "Braiz · Super Slowed", duration: "1:53", src: "./assets/music/tomb-of-death-super-slowed.mp3" },
+  { title: "Encanto", artist: "KIT", duration: "2:08", src: "./assets/music/encanto-kit.mp3" },
+  { title: "Lina Colina", artist: "blueberry · DJ KHRLP", duration: "1:40", src: "./assets/music/lina-colina-blueberry.mp3" },
+  { title: "Flutuar", artist: "Sped Up", duration: "2:15", src: "./assets/music/flutuar-sped-up.mp3" },
+];
+
+const portraitPoses = [
+  { src: "./assets/placeholder-avatar.png", label: "FOUNDER MODE" },
+  { src: "./assets/placeholder-avatar.png", label: "HELLO MODE" },
+  { src: "./assets/placeholder-avatar.png", label: "BUILDER MODE" },
+];
+
+const apps = {
+  projects: {
+    title: "Projects — Finder",
+    chrome: "#f5a39c",
+    subtitle: "5 SELECTED CASE FILES",
+    render: () => `
+      <div class="app-content projects-app">
+        <span class="app-kicker">SELECTED WORK / 2021 → 2026</span>
+        <h2 class="app-heading">Things that<br><em>actually shipped.</em></h2>
+        <p class="app-deck">The portfolio is the point of this operating system: Website creation, AI Automation Workflows, and Voice Agents, and the proof behind them.</p>
+        <section class="case-study-overview">
+          <div class="service-matrix">
+            <article><span>01</span><strong>Website Development</strong><p>High-converting websites that turn visitors into qualified leads automatically</p></article>
+            <article><span>02</span><strong>Voice AI Agents</strong><p>Production-ready voice agents for phone intakes, booking, and customer service</p></article>
+            <article><span>03</span><strong>AI Automation Workflows</strong><p>Custom backend workflows connecting CRM platforms with intelligent automation</p></article>
+            <article><span>04</span><strong>AI Consulting</strong><p>Strategic implementation of AI solutions for business process optimization</p></article>
+          </div>
+        </section>
+        <div class="project-list">
+          ${projectCard("01","Project Aetheria","Artificial Intelligence / Climate Tech","A decentralized AI network that predicts global weather anomalies using real-time atmospheric sensor data","AI Network","Climate Tech","#b9dfe8","https://aetheria-dev.netlify.app/")}
+          ${projectCard("02","EchoSustain","Sustainability / IoT","A smart home app that tracks household water and energy usage in real time, gamifying conservation efforts","Smart Home","Sustainability","#e3b5a3","private")}
+          ${projectCard("03","NeuralCanvas","Developer Tools / Generative AI","A collaborative, web-based design workspace where real-time voice prompts generate vector art and UI components","Design Tool","Generative AI","#c7f36b","https://neuralcanvas.design")}
+        </div>
+      </div>`,
+  },
+  revenue: {
+    title: "Client Results — Proof.app",
+    chrome: "#c7f36b",
+    subtitle: "CLIENT-CASE OUTCOMES",
+    render: () => `
+      <div class="app-content client-results-app">
+        <span class="app-kicker">CLIENT RESULTS / COMMERCIAL CASE FILES</span>
+        <h2 class="app-heading">Outcomes for<br><em>the companies.</em></h2>
+        <p class="app-deck">These are client engagements, not Zaid Khan OS revenue. Every number is labelled by what it represents so pipeline, sales, leads, and public proof do not get mixed together.</p>
+        <div class="client-case-grid">
+          ${clientCases.map(renderClientCase).join("")}
+        </div>
+        <section class="public-proof-strip" aria-label="Public portfolio evidence">
+          ${metric("10","SELECTED CASE FILES","AI voice, websites, operations, consulting, and deployment work.","#d8efaf")}
+          ${metric("5","PLAYABLE VIDEOS","Client testimonial videos with direct YouTube sources.","#f8dfa2")}
+          ${metric("1.81M","YOUTUBE VIEWS","Recorded channel reach at the latest saved audit.","#c4e5ed")}
+        </section>
+        <p class="source-note">DISCLOSURE: ₹80Cr+ and ₹50Cr are founder/client-case reports supplied for this portfolio. They describe pipeline or channelled property value, not independently audited realized revenue. Open Case Files for the complete wording.</p>
+        <div class="results-archives">
+          <span>GO DEEPER</span>
+          <button type="button" data-open="journey">THE FULL JOURNEY ↗</button>
+          <button type="button" data-open="blog">AI FIELD NOTES ↗</button>
+          <button type="button" data-open="testimonials">CLIENT VIDEOS ↗</button>
+        </div>
+      </div>`,
+  },
+  process: {
+    title: "How We Work — Systems.app",
+    chrome: "#a8d7e8",
+    subtitle: "OPERATING LOOP",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">ZAID KHAN SYSTEMS</span>
+        <h2 class="app-heading">Fast, but never<br><em>careless.</em></h2>
+        <p class="app-deck">Every serious build moves through the same five stages. The point is not more meetings. The point is fewer surprises.</p>
+        <div class="process-list">
+          ${step("Find the leverage","We isolate the one business constraint worth attacking: cost, speed, conversion, capacity, or attention.","#f5a39c")}
+          ${step("Lock the system","Scope, proof criteria, visual direction, data boundaries, and failure paths become one written contract.","#ffd95a")}
+          ${step("Build the sharp edge","The differentiating interaction or technical risk gets built first. No polishing a weak core.","#a8d7e8")}
+          ${step("Test the full loop","Real-browser QA, mobile behavior, edge cases, and the actual end-user outcome. “It compiled” means nothing.","#c7f36b")}
+          ${step("Ship, measure, improve","Production verification, evidence, handoff, then iteration from real usage instead of opinions.","#b8a7e8")}
+        </div>
+      </div>`,
+  },
+  achievements: {
+    title: "Achievements — Vault.app",
+    chrome: "#ffd95a",
+    subtitle: "6 / 6 UNLOCKED",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">ACHIEVEMENT VAULT</span>
+        <h2 class="app-heading">Proof,<br><em>pixelated.</em></h2>
+        <p class="app-deck">Not trophies for showing up. Milestones that changed the operating system.</p>
+        <div class="badge-grid">
+          ${badge("120k+","Voice Automation Veteran","Deploys production-ready Voice AI pipelines that maintain sub-800ms latency and zero dropped calls","#f5a39c")}
+          ${badge("4.2x","Lead Gen Architect","Redesigned client web funnels with interactive AI widgets that qualify and capture inbound leads instantly","#a8d7e8")}
+          ${badge("$1.8M","Pipeline Saver","Automated after-hours booking systems for service businesses, capturing high-intent leads that normally go to voicemail","#c7f36b")}
+          ${badge("99.4%","System Reliability Expert","Built stable API integrations connecting Webhooks, Twilio, and LLM backends to prevent CRM sync failures","#ffd95a")}
+          ${badge("50+","Domain Tuning Master","Trained and deployed specialized conversational models tailored to complex industry knowledge bases","#b8a7e8")}
+          ${badge("Calls Handled","Custom Agents","","#a9e1d2")}
+        </div>
+        <div class="quote">“Build systems that work while you sleep.”</div>
+      </div>`,
+  },
+  testimonials: {
+    title: "Testimonials — Voices.app",
+    chrome: "#ffd95a",
+    subtitle: "REAL VIDEOS",
+    render: () => `
+      <div class="app-content video-proof-app">
+        <span class="app-kicker">CLIENT VOICES / YOUTUBE</span>
+        <h2 class="app-heading">Do not trust me.<br><em>Press play.</em></h2>
+        <p class="app-deck">Real client testimonial videos in their own voice. Add yours to the <code>proofVideos</code> array in app.js — the theater below is empty until you do.</p>
+        ${renderProofTheater()}
+        <p class="source-note">No invented client names, companies, or outcomes. Playback and source titles should come directly from YouTube.</p>
+      </div>`,
+  },
+  journey: {
+    title: "Journey — Timeline.app",
+    chrome: "#b8a7e8",
+    subtitle: "2021 → NOW",
+    render: () => `
+      <div class="app-content journey-app">
+        <span class="app-kicker">MY JOURNEY / PUBLIC FILE</span>
+        <h2 class="app-heading">Built in chapters.<br><em>Still becoming.</em></h2>
+        <p class="app-deck">A deliberately honest public timeline. The wins, the ventures that died, and what the failures taught. Where the archive is incomplete, it says so instead of inventing a cleaner story.</p>
+        <div class="journey-polaroids" aria-label="Add your own real photos here">
+          <figure><img src="./assets/placeholder-avatar.png" alt="Swap in your own photo" loading="lazy" /><figcaption>Early days building websites</figcaption></figure>
+          <figure><img src="./assets/placeholder-avatar.png" alt="Swap in your own photo" loading="lazy" /><figcaption>First AI automation project</figcaption></figure>
+          <figure><img src="./assets/placeholder-avatar.png" alt="Swap in your own photo" loading="lazy" /><figcaption>Voice agent breakthrough</figcaption></figure>
+          <figure><img src="./assets/placeholder-avatar.png" alt="Swap in your own photo" loading="lazy" /><figcaption>Current enterprise systems</figcaption></figure>
+        </div>
+        <div class="journey-list">
+          ${milestone("2021","The Web Dev Foundation","Started building custom high-converting websites for local service businesses and small e-commerce brands","#f5d56e")}
+          ${milestone("2022","API Integration & Automation","Expanded services into custom backend workflows, linking site forms directly with CRM platforms and Zapier pipelines","#ffd95a")}
+          ${milestone("2023","Entering the LLM Era","Shifted focus toward generative AI, integrating early chat widgets directly into client websites to answer FAQs","#f5a39c")}
+          ${milestone("2024","Scaling Voice AI","Built real-time conversational voice agents capable of handling full phone intakes, phone scheduling, and outbound calls","#e8a49c")}
+          ${milestone("2025","Unified AI Architecture","Standardized a complete core offering combining high-converting web designs with synchronized AI chat and voice agents","#c2b2e9")}
+          ${milestone("2026","Enterprise Workflows","Optimized model latency, reduced hallucination rates to near-zero, and began deploying agents for multi-location businesses","#a8d7e8")}
+          ${milestone("NEXT","Global Scale","Building enterprise-grade AI systems that handle millions of conversations monthly","#c7f36b")}
+          ${milestone("NEXT","Global Scale","Building enterprise-grade AI systems that handle millions of conversations monthly","#b8a7e8")}
+        </div>
+      </div>`,
+  },
+  founder: {
+    title: "Founder.txt — Notepad",
+    chrome: "#e6e35f",
+    subtitle: "PLAIN TEXT / READ ONLY",
+    render: () => `
+      <div class="notepad-app">
+        <header><span>FOUNDER.TXT</span><small>therealzaidkhan.co.uk</small></header>
+        <p class="notepad-lead">Building systems<br>that make money<br>while I sleep.</p>
+        <p>I am Zaid Khan—founder, operator, and AI builder. I care about commercially useful systems: products that ship, automations that remove expensive work, and interfaces people remember.</p>
+        <p>The main folders on this desktop are Projects and Results. Start there. The rest explains how the machine works.</p>
+        <blockquote>My word is iron. I do what I say, I say what I do.</blockquote>
+        <footer>AVAILABLE FOR SELECT BUILDS · LAST PATCHED 29 JUL 2026</footer>
+      </div>`,
+  },
+  files: {
+    title: "Case Files — Finder",
+    chrome: "#a8d7e8",
+    subtitle: "NESTED FOLDERS / DOUBLE-CLICK",
+    render: () => renderFileExplorer(),
+  },
+  blog: {
+    title: "Field Notes — Blog.app",
+    chrome: "#b8a7e8",
+    subtitle: "AI AUTOMATION SPECIALIST",
+    render: () => `
+      <div class="app-content blog-app">
+        <span class="app-kicker">Zaid Khan / FIELD NOTES</span>
+        <h2 class="app-heading">Useful answers.<br><em>Built from the work.</em></h2>
+        <p class="app-deck">Field notes on building production AI systems that actually work. Add real posts as static .html pages under ./blog/ and list them here.</p>
+        <div class="blog-card-grid">
+          ${blogCard("Voice AI Implementation","How to build production-ready voice agents that handle real customer conversations","./blog/post-1.html","#f3aaa8")}
+          ${blogCard("Website Conversion Optimization","The anatomy of high-converting websites that turn visitors into qualified leads","./blog/post-2.html","#b9dfe8")}
+          ${blogCard("AI Automation Workflows","Building automated systems that save hours of manual work every day","./blog/post-3.html","#c7f36b")}
+        </div>
+        <a class="blog-index-link" href="./blog/" target="_blank" rel="noreferrer">OPEN THE COMPLETE FIELD NOTES INDEX ↗</a>
+        <p class="source-note">SEO NOTE: the pages are static, crawlable, internally linked, authored by Zaid Khan, and written for humans first. Search position still depends on authority, competition, technical health, and external corroboration.</p>
+      </div>`,
+  },
+  whiteboard: {
+    title: "Whiteboard — Notes.app",
+    chrome: "#fff8dc",
+    subtitle: "DRAG · WRITE · PERSIST",
+    render: () => `
+      <div class="whiteboard-app" data-whiteboard>
+        <header>
+          <div><span>Zaid Khan OS WHITEBOARD</span><h2>Leave a<br><em>sticky note.</em></h2></div>
+          <form data-note-form>
+            <label for="sticky-note-copy">YOUR NOTE</label>
+            <textarea id="sticky-note-copy" data-note-input maxlength="180" rows="3" placeholder="What should Zaid Khan build, fix, or remember?" required></textarea>
+            <div><button type="submit">+ ADD STICKY</button><button type="button" data-reset-desktop>RESET DESKTOP ICONS</button></div>
+          </form>
+        </header>
+        <div class="whiteboard-canvas" data-note-board aria-label="Draggable sticky notes"></div>
+        <footer>NOTES AND ICON POSITIONS PERSIST IN THIS BROWSER · DRAG EACH NOTE BY ITS TOP BAR</footer>
+      </div>`,
+  },
+  socials: {
+    title: "Socials — Broadcast.app",
+    chrome: "#f4b6cf",
+    subtitle: "100K+ CONNECTED",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">THE DISTRIBUTION LAYER</span>
+        <h2 class="app-heading">Build in public.<br><em>Share in public.</em></h2>
+        <p class="app-deck">I document the tools, decisions, failures, and systems behind the work for builders who want usable signal.</p>
+        <p class="source-note">My 70K Instagram @therealzaidkhan got banned 😭. New account: @therealzaidkhan.</p>
+        <div class="social-list">
+          ${social("YT","YouTube","31.7K subscribers · 1.81M views","https://youtube.com/therealzaidkhan","#ffb2ae")}
+          ${social("IG","New Instagram","Rebuilding after the 70K account ban","https://instagram.com/therealzaidkhan","#f3b8db")}
+          ${social("X","X / Twitter","Daily experiments and operator notes","https://x.com/therealzaidkhan","#b9dfe8")}
+          ${social("GH","GitHub","Products, experiments, and shipped code","https://github.com/therealzaidkhan","#d4c7ed")}
+        </div>
+        <div class="social-garden" aria-hidden="true">
+          <img src="./assets/premium-world/potted-plant.png" alt="">
+          <span><i></i><i></i><i></i><i></i><i></i></span>
+          <p>DISTRIBUTION GARDEN · GROWING AGAIN</p>
+        </div>
+      </div>`,
+  },
+  updates: {
+    title: "Updates — Changelog.app",
+    chrome: "#9ec58f",
+    subtitle: "LIVE OS / v5.0.0",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">PUBLIC CHANGELOG</span>
+        <h2 class="app-heading">A portfolio that<br><em>keeps shipping.</em></h2>
+        <p class="app-deck">ZAID KHAN OS gets patched as the business changes. Projects, proof, lessons, and experiments become visible updates instead of stale résumé bullets.</p>
+        <div class="process-list">
+          ${step("v5.0.0 · Personal World","Added Music Deck, Garage Mail, video suggestions, Game Room, prank folders, portrait pose switching, a visible SOS channel, and original day/night ambient events.","#f4b6cf")}
+          ${step("v4.1.0 · Video Proof","Embedded five real YouTube testimonials with actual audio, thumbnails, playlist selection, cinema expansion, and direct source fallbacks.","#ffd95a")}
+          ${step("v4.0.0 · Homepage Mode","Restored the original desktop composition, removed the game world, added Day/Night/Dark themes, professional iconography, honest activity, Founder.txt, and Journey.app.","#f5a39c")}
+          ${step("v3.2.0 · Night + Voice","Added a safe browser-native voice concierge and appearance controls.","#a9e1d2")}
+          ${step("v3.0.0 · Desktop Mode","One-screen desktop, working browser, emergency channel, movable windows, and a moving Zaid Khan.","#c7f36b")}
+          ${step("v1.2.0 · Proof Vault","Source-backed metrics and five canonical client testimonial links added.","#ffd95a")}
+          ${step("v1.0.0 · First Boot","Desktop OS, draggable windows, command search, projects, revenue, process, achievements, socials, and contact.","#f5a39c")}
+        </div>
+      </div>`,
+  },
+  about: {
+    title: "About — Zaid Khan.app",
+    chrome: "#e9d19d",
+    subtitle: "PROFILE / ONLINE",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">USER PROFILE</span>
+        <div class="profile-hero">
+          <div class="profile-portrait"><img src="./assets/placeholder-avatar.png" alt=""></div>
+          <div>
+            <h2 class="app-heading">Zaid<br><em>Khan.</em></h2>
+            <div class="tag-row"><span class="tag">UK</span><span class="tag">Full Stack Developer</span><span class="tag">AI Specialist</span></div>
+          </div>
+        </div>
+        <div class="hairline"></div>
+        <p class="app-deck">I design Website creation, AI Automation Workflows, and Voice Agents.</p>
+        <p class="app-deck">I care about commercially useful systems: products that ship, automations that remove expensive work, and interfaces people remember.</p>
+        <div class="quote">Building the future of automated customer interactions.<br>Still loading.</div>
+        <div class="tag-row">
+          <span class="tag">AI VOICE</span><span class="tag">REVENUE AUTOMATION</span><span class="tag">PREMIUM WEB</span><span class="tag">CONTENT SYSTEMS</span>
+        </div>
+      </div>`,
+  },
+  contact: {
+    title: "Contact — Mail.app",
+    chrome: "#a9e1d2",
+    subtitle: "CHANNEL OPEN",
+    render: () => `
+      <div class="app-content">
+        <span class="app-kicker">OPEN A CHANNEL</span>
+        <h2 class="app-heading">Bring me a real<br><em>business problem.</em></h2>
+        <p class="app-deck">If the problem is expensive, repetitive, slow, or impossible to scale manually, there is probably a system worth building.</p>
+        <div class="contact-panel">
+          <div class="contact-links">
+            <a class="big-contact" href="mailto:primecommercewebdevelopment@gmail.com">HELLO@YOURDOMAIN.COM ↗</a>
+            <a class="big-contact" href="https://calendly.com/zaidkhan" target="_blank" rel="noreferrer">BOOK A 30-MIN CALL ↗</a>
+            <button class="contact-option" type="button" data-copy="primecommercewebdevelopment@gmail.com">COPY EMAIL TO CLIPBOARD</button>
+            <a class="contact-option" href="https://therealzaidkhan.co.uk" target="_blank" rel="noreferrer">VISIT MY WEBSITE</a>
+          </div>
+          <aside class="system-card">
+            <p class="availability"><i></i> SELECT BUILDS OPEN</p>
+            <ul>
+              <li>AI voice agents</li>
+              <li>Revenue automations</li>
+              <li>Premium web systems</li>
+              <li>Product experiences</li>
+            </ul>
+            <p class="source-note">BEST INPUT: the constraint, current cost, desired outcome, and deadline.</p>
+          </aside>
+        </div>
+        <div class="garage-mail-grid">
+          <form class="garage-mail" name="garage-mail" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax-form>
+            <input type="hidden" name="form-name" value="garage-mail" />
+            <input class="form-trap" name="bot-field" tabindex="-1" autocomplete="off" />
+            <header><span>GARAGE MAIL</span><small>DIRECT TO ZAID</small></header>
+            <label>Your name<input name="name" type="text" maxlength="80" required autocomplete="name" /></label>
+            <label>Your email<input name="email" type="email" maxlength="160" required autocomplete="email" /></label>
+            <label>What should we build?<textarea name="message" rows="4" maxlength="1600" required></textarea></label>
+            <button type="submit">SEND MESSAGE ↗</button>
+            <p class="form-status" data-form-status aria-live="polite">NETLIFY DELIVERY · EMAIL FALLBACK READY</p>
+          </form>
+          <form class="garage-mail suggestion-mail" name="video-suggestion" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax-form>
+            <input type="hidden" name="form-name" value="video-suggestion" />
+            <input class="form-trap" name="bot-field" tabindex="-1" autocomplete="off" />
+            <header><span>VIDEO SUGGESTION</span><small>CONTENT QUEUE</small></header>
+            <label>Your name<input name="name" type="text" maxlength="80" required autocomplete="name" /></label>
+            <label>Reply email<input name="email" type="email" maxlength="160" required autocomplete="email" /></label>
+            <label>What should Zaid Khan make?<textarea name="suggestion" rows="4" maxlength="1000" required></textarea></label>
+            <button type="submit">QUEUE THE IDEA ↗</button>
+            <p class="form-status" data-form-status aria-live="polite">GOOD IDEAS BECOME PUBLIC BUILDS</p>
+          </form>
+        </div>
+      </div>`,
+  },
+  voice: {
+    title: "Talk to the AI Voice Agent — Concierge.app",
+    chrome: "#9fded4",
+    subtitle: "BROWSER VOICE / ONLINE",
+    render: () => `
+      <div class="voice-agent">
+        <header class="voice-agent-hero">
+          <img src="./assets/premium-world/voice-lab.png" alt="" />
+          <div><span>Zaid Khan AI CONCIERGE</span><h2>Talk to the<br><em>AI voice agent.</em></h2><p>Ask about projects, results, systems, testimonials, the journey, or starting a project.</p></div>
+        </header>
+        <div class="voice-console">
+          <div class="voice-status"><i></i><span data-voice-status>READY FOR A COMMAND</span></div>
+          <div class="voice-transcript" data-voice-transcript aria-live="polite">
+            <p class="agent-line"><strong>ZAID KHAN OS</strong><span>Say “show me the projects” or type below.</span></p>
+          </div>
+          <div class="voice-controls">
+            <button type="button" data-voice-mic>HOLD TO TALK</button>
+            <label><input type="text" data-voice-input placeholder="Ask ZAID KHAN OS..." autocomplete="off" /><button type="button" data-voice-send>SEND</button></label>
+          </div>
+          <div class="voice-prompts">
+            <button type="button" data-voice-prompt="Show me the projects">PROJECTS</button>
+            <button type="button" data-voice-prompt="What results have you generated?">RESULTS</button>
+            <button type="button" data-voice-prompt="How can I contact Zaid Khan?">CONTACT</button>
+          </div>
+        </div>
+        <!-- Optional: embed a real hosted voice agent (Vapi, Retell, Dograh, your own) here in an <iframe>.
+             The concierge above works with zero backend via the browser's own speech recognition/synthesis. -->
+        <p class="source-note">PRIVACY: this version uses the browser's speech recognition and speech synthesis. No API key is exposed in the static site.</p>
+      </div>`,
+  },
+  browser: {
+    title: "Browser — ZaidNet.app",
+    chrome: "#a8d7e8",
+    subtitle: "WEB / SECURE",
+    render: () => `
+      <div class="browser-app">
+        <div class="browser-toolbar">
+          <button type="button" data-browser-home aria-label="Browser home">⌂</button>
+          <label><span>HTTPS://</span><input type="text" value="therealzaidkhan.co.uk" aria-label="Web address" /></label>
+          <button type="button" data-browser-go>GO</button>
+          <button type="button" data-browser-external>OPEN ↗</button>
+        </div>
+        <nav class="browser-bookmarks" aria-label="Browser bookmarks">
+          <button type="button" data-browser-url="https://therealzaidkhan.co.uk">WEBSITE</button>
+          <button type="button" data-browser-url="https://youtube.com/therealzaidkhan">YOUTUBE</button>
+          <button type="button" data-browser-url="https://instagram.com/therealzaidkhan">INSTAGRAM</button>
+          <button type="button" data-browser-url="https://github.com/therealzaidkhan">GITHUB</button>
+        </nav>
+        <div class="browser-start">
+          <img src="./assets/premium-world/update-terminal.png" alt="" />
+          <span>ZAIDNET / READY</span>
+          <h2>Where do you<br /><em>want to go?</em></h2>
+          <p>This is a working browser surface. Some websites block embedded viewing; OPEN ↗ always launches the address in a full browser tab.</p>
+        </div>
+        <iframe class="browser-frame" title="ZaidNet browser page" hidden></iframe>
+      </div>`,
+  },
+  music: {
+    title: "Music — SoundDeck.app",
+    chrome: "#f4b6cf",
+    subtitle: "4 TRACKS / MANUAL PLAY",
+    render: () => `
+      <div class="app-content music-app">
+        <span class="app-kicker">Zaid Khan'S CURRENT ROTATION</span>
+        <h2 class="app-heading">Sound on.<br><em>Build mode.</em></h2>
+        <p class="app-deck">The player never autostarts. Pick a track here or use the compact deck on the desktop.</p>
+        <div class="music-library">
+          ${musicTracks.map((track, index) => `
+            <button type="button" data-music-track="${index}">
+              <span>${String(index + 1).padStart(2, "0")}</span>
+              <strong>${track.title}</strong>
+              <small>${track.artist}</small>
+              <time>${track.duration}</time>
+            </button>
+          `).join("")}
+        </div>
+        <p class="source-note">MEDIA NOTE: public deployment requires web-distribution permission for every track. Playback is opt-in and local to this browser tab.</p>
+      </div>`,
+  },
+  games: {
+    title: "Games — Arcade.app",
+    chrome: "#8d78d8",
+    subtitle: "2 LIVE / LOCAL LEADERBOARDS",
+    render: () => `
+      <div class="game-room">
+        <header>
+          <div><span>Zaid Khan BUILT THESE</span><h2>Game<br><em>Room.</em></h2></div>
+          <nav aria-label="Playable games">
+            <button class="active" type="button" data-game-url="./games/viper-arena/" data-game-title="VIPER ARENA">VIPER ARENA</button>
+            <button type="button" data-game-url="./games/fangs-io/" data-game-title="FANGS.IO">FANGS.IO</button>
+            <button type="button" data-game-all>ALL GAMES</button>
+            <button type="button" data-game-fullscreen>FULLSCREEN</button>
+            <button type="button" data-game-exit-fullscreen hidden>EXIT FULLSCREEN</button>
+          </nav>
+        </header>
+        <div class="game-stage">
+          <div class="game-stage-bar"><strong data-game-now>VIPER ARENA</strong><span>USERNAME · LOADOUT · BOSSES · LOCAL LEADERBOARD · ASMR</span><a href="./games/viper-arena/" data-game-external target="_blank" rel="noreferrer">OPEN FULLSCREEN ↗</a></div>
+          <iframe data-game-frame src="./games/viper-arena/" title="VIPER ARENA game" loading="lazy" allow="autoplay; fullscreen"></iframe>
+        </div>
+        <div class="game-case-files">
+          <article><img src="./assets/games/viper-arena.png" alt="Viper Arena gameplay screenshot" /><div><strong>VIPER ARENA</strong><span>FLAGSHIP · BOSSES · LOADOUTS · ASMR · SCORES</span></div></article>
+          <article class="fangs-feature"><span class="fangs-art" aria-hidden="true">FANGS.IO</span><div><strong>FANGS.IO</strong><span>PLAYABLE · LOCAL HIGH SCORES</span></div></article>
+          <article class="neon-feature"><img src="./assets/games/neon-drift.png" alt="Neon Drift gameplay screenshot" /><div><strong>NEON DRIFT</strong><span>FEATURED CASE FILE · PLAYABLE SOURCE RECOVERY NEXT</span></div></article>
+        </div>
+      </div>`,
+  },
+  keys: {
+    title: "API_KEYS.env — TextEdit",
+    chrome: "#a9e1d2",
+    subtitle: "DEMO FILE / NOT REAL",
+    render: () => `
+      <div class="fake-keys">
+        <header><span>API_KEYS.env</span><strong>SAFE DEMO</strong></header>
+        <pre><code># If you found this, congratulations.
+# Every value below is intentionally fake.
+
+OPENAI_API_KEY=DEMO_KEY_NOT_REAL
+GEMINI_API_KEY=DEMO_KEY_NOT_REAL
+STRIPE_SECRET_KEY=DEMO_KEY_NOT_REAL
+SUPABASE_SERVICE_ROLE=DEMO_KEY_NOT_REAL
+
+MESSAGE="Nice try. Real secrets never ship to the browser."</code></pre>
+        <button type="button" data-open="learn">BROWSE PROJECTS ↗</button>
+      </div>`,
+  },
+  prank: {
+    title: "DO_NOT_OPEN — Finder",
+    chrome: "#ff6b63",
+    subtitle: "6 ITEMS / YOU WERE WARNED",
+    render: () => renderPrankFinder(),
+  },
+  hack: {
+    title: "HACK ZAID KHAN OS — Terminal.exe",
+    chrome: "#17131b",
+    subtitle: "UNAUTHORIZED ACCESS MODE",
+    render: () => `
+      <div class="hack-terminal" data-hack-terminal>
+        <div class="hack-output" data-hack-output>
+          <p>Zaid Khan OS SECURE SHELL v5.4 — unauthorized session</p>
+          <p>This entire OS was vibe-coded. Surely the security is terrible.</p>
+          <p>Somewhere in here are Zaid Khan's API keys. Go on. Take them.</p>
+          <p>Type <b>help</b> to see your options.</p>
+        </div>
+        <label class="hack-input-row"><span>root@zaidos:~$</span><input type="text" data-hack-input autocomplete="off" spellcheck="false" placeholder="type a command..." /></label>
+      </div>`,
+  },
+  emergency: {
+    title: "Emergency — Hotline.app",
+    chrome: "#ff6b63",
+    subtitle: "PRIORITY CHANNEL",
+    render: () => `
+      <div class="app-content emergency-content">
+        <span class="app-kicker">URGENT BUSINESS IMPLEMENTATION</span>
+        <h2 class="app-heading">Need it fixed<br /><em>right now?</em></h2>
+        <p class="app-deck">For urgent AI implementation, broken revenue systems, or a high-speed build, reach Zaid Khan directly. Please use this for genuine business emergencies.</p>
+        <div class="emergency-actions">
+          <a class="emergency-primary" href="https://wa.me/923148269707" target="_blank" rel="noreferrer">WHATSAPP NOW ↗<small>+923148269707</small></a>
+          <a class="emergency-secondary" href="tel:+923148269707">CALL Zaid Khan ↗<small>Tap to call</small></a>
+          <a class="emergency-secondary" href="https://calendly.com/zaidkhan" target="_blank" rel="noreferrer">BOOK 30 MIN ↗<small>For non-emergency builds</small></a>
+        </div>
+      </div>`,
+  },
+  rickroll: {
+    title: "media player — now playing",
+    chrome: "#ff6b63",
+    subtitle: "LOADING YOUR FILE...",
+    render: () => `
+      <div class="rickroll-app">
+        <div class="rickroll-fakebar"><span data-rickroll-label>opening your file...</span><small>0:00 / 3:33</small></div>
+        <div class="rickroll-frame">
+          <iframe data-rickroll-frame src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0" title="Now playing" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="rickroll-caption">You have been rickrolled by a 17 year old's portfolio website. Close the window and pretend this never happened.</p>
+      </div>`,
+  },
+  run: {
+    title: "Founder Run — Arcade.exe",
+    chrome: "#c7f36b",
+    subtitle: "ONE BUTTON / INFINITE HUSTLE",
+    render: () => `
+      <div class="run-app" data-run-app>
+        <div class="run-hud">
+          <span class="run-kicker">FOUNDER RUN</span>
+          <div class="run-scores"><span>SCORE <b data-run-score>0</b></span><span>BEST <b data-run-best>0</b></span></div>
+        </div>
+        <div class="run-stage">
+          <canvas data-run-canvas width="720" height="300"></canvas>
+          <div class="run-overlay" data-run-overlay>
+            <strong data-run-over-title>FOUNDER RUN</strong>
+            <p data-run-over-copy>Jump the bugs, the scams, and the pointless meetings. Grab the cash. See how long you last.</p>
+            <button type="button" class="run-start" data-run-start>PRESS SPACE / TAP TO START</button>
+          </div>
+        </div>
+        <p class="run-hint">SPACE or TAP to jump · again mid-air for a double jump · land on the green platforms, grab the ₹, dodge everything.</p>
+      </div>`,
+  },
+};
+
+const projects = [];
+const openWindows = new Map();
+const visits = new Set(JSON.parse(localStorage.getItem("zaid-os-visits") || "[]"));
+let zTop = 1200;
+let cascade = 0;
+let booted = false;
+let dragState = null;
+
+const os = document.querySelector("#os");
+const boot = document.querySelector("#boot");
+const layer = document.querySelector("#window-layer");
+const palette = document.querySelector("#command-palette");
+const commandInput = document.querySelector("#command-input");
+const commandResults = document.querySelector("#command-results");
+const worldScroll = document.querySelector("#world-scroll");
+const worldPlayer = document.querySelector("#world-player");
+const playerSprite = worldPlayer?.querySelector("img");
+const playerLabel = document.querySelector("#player-label");
+const themeButtons = [...document.querySelectorAll("[data-theme-choice]")];
+const musicAudio = document.querySelector("#music-audio");
+const musicDeck = document.querySelector("[data-music-deck]");
+const musicToggle = document.querySelector("[data-music-toggle]");
+const musicClose = document.querySelector("[data-music-close]");
+const portraitButton = document.querySelector("[data-portrait]");
+const portraitImage = document.querySelector("[data-portrait-img]");
+let musicIndex = 0;
+let portraitIndex = 0;
+let stickyDrag = null;
+const spriteSources = {
+  down: "./assets/placeholder-sprite.png",
+  up: "./assets/placeholder-sprite.png",
+  left: "./assets/placeholder-sprite.png",
+  right: "./assets/placeholder-sprite.png",
+};
+const districtLabels = {
+  home: "ZAID · HOME BASE",
+  systems: "ZAID · SYSTEMS DISTRICT",
+  proof: "ZAID · PROOF PLAZA",
+  updates: "ZAID · UPDATE TERMINAL",
+};
+let playerState = { x: 0, y: 0, direction: "down", waypoint: -1, paused: false };
+let walkTimer;
+
+function applyTheme(theme) {
+  const safeTheme = ["day", "night", "dark"].includes(theme) ? theme : "day";
+  os.dataset.theme = safeTheme;
+  os.classList.toggle("night-mode", safeTheme === "night");
+  os.classList.toggle("dark-mode", safeTheme === "dark");
+  themeButtons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === safeTheme)));
+  localStorage.setItem("zaid-os-theme", safeTheme);
+}
+
+function toggleTheme() {
+  const sequence = ["day", "dark"];
+  const current = sequence.indexOf(os.dataset.theme || "day");
+  const next = sequence[(current + 1) % sequence.length];
+  applyTheme(next);
+  toast(`${next.toUpperCase()} MODE`, next === "night" ? "The night desk is online." : next === "dark" ? "Distraction-free dark workstation enabled." : "Day operations resumed.");
+}
+
+function projectCard(index, title, category, copy, proofA, proofB, color, url) {
+  return `<article class="project-card" style="--card:${color}" data-project-url="${url}">
+    <span class="project-index">${index} / SYSTEM</span>
+    <h3>${title}</h3><strong>${category}</strong><p>${copy}</p>
+    <div class="proof-chips"><span>${proofA}</span><span>${proofB}</span></div>
+    <span class="open-project">${url ? "OPEN ↗" : "CASE FILE"}</span>
+  </article>`;
+}
+function renderClientCase(item) {
+  return `<article class="client-case-card" style="--case:${item.color}" data-case-id="${item.id}">
+    <div class="client-case-art"><img src="${item.image}" alt="Editorial pixel-art illustration for the ${item.company} case study" loading="lazy" /></div>
+    <div class="client-case-copy">
+      <small>${item.sector}</small>
+      <h3>${item.company}</h3>
+      <div class="client-case-metric"><strong>${item.metric}</strong><span>${item.metricLabel}</span></div>
+      <p>${item.summary}</p>
+      <details><summary>READ THE OUTCOME</summary><p>${item.outcome}</p></details>
+    </div>
+  </article>`;
+}
+function blogCard(title, copy, url, color) {
+  return `<article class="blog-card" style="--blog:${color}">
+    <small>AI FIELD NOTE / Zaid Khan</small>
+    <h3>${title}</h3>
+    <p>${copy}</p>
+    <a href="${url}" target="_blank" rel="noreferrer">READ ARTICLE ↗</a>
+  </article>`;
+}
+function renderFileExplorer() {
+  return `
+    <div class="file-explorer" data-file-explorer>
+      <header class="finder-toolbar">
+        <div class="finder-nav"><button type="button" data-finder-back aria-label="Back">‹</button><button type="button" data-finder-forward aria-label="Forward">›</button></div>
+        <strong data-finder-title>Zaid Khan OS</strong>
+        <div class="finder-views" aria-hidden="true"><span>▦</span><span>☷</span><span>▥</span></div>
+        <label><span>⌕</span><input type="search" data-finder-search placeholder="Search case files" aria-label="Search case files" /></label>
+      </header>
+      <div class="finder-shell">
+        <aside class="finder-sidebar">
+          <strong>FAVOURITES</strong>
+          <button type="button" data-finder-path="">⌂ All Files</button>
+          <button type="button" data-finder-path="Case Studies">▣ Case Studies</button>
+          <button type="button" data-finder-path="Client Videos">▶ Client Videos</button>
+          <button type="button" data-finder-path="Field Notes">✎ Field Notes</button>
+          <button type="button" data-finder-path="Services">◆ Services</button>
+          <strong>LOCATIONS</strong>
+          <button type="button" data-open="projects">◫ Projects</button>
+          <button type="button" data-open="revenue">▥ Client Results</button>
+        </aside>
+        <main class="finder-main">
+          <nav class="finder-breadcrumbs" data-finder-breadcrumbs aria-label="Current folder"></nav>
+          <div class="finder-list-head"><span>NAME</span><span>KIND</span><span>STATUS</span></div>
+          <div class="finder-list" data-finder-list></div>
+          <p class="finder-hint">DOUBLE-CLICK A FOLDER OR FILE · SINGLE-CLICK TO PREVIEW</p>
+        </main>
+        <aside class="finder-preview" data-finder-preview>
+          <span class="finder-preview-icon">▣</span>
+          <h3>Case Files</h3>
+          <p>Select a file to preview its story. Double-click to open folders, source links, videos, and articles.</p>
+        </aside>
+      </div>
+    </div>`;
+}
+const prankFiles = [
+  { id: "keys", name: "api_keys.env", kind: "Env File", status: "DEFINITELY REAL", size: "1 KB", icon: "▣", preview: "Oh you sweet summer child. You think the real keys are just sitting in a folder called DO_NOT_OPEN? Double-click it. See what happens to people who go looking." },
+  { id: "xxx", name: "definitely_not_xxx.mp4", kind: "Video", status: "18+ ??", size: "0 KB", icon: "▶", preview: "Why are you here? Genuinely. It is a portfolio website. What did you think this was. Double-click if you have truly abandoned all shame." },
+  { id: "pokemon", name: "pokemon_emerald_ROM_legit.gba", kind: "ROM", status: "TOTALLY LEGAL", size: "8 MB", icon: "◈", preview: "A totally legal, definitely-purchased copy of a game from 2004. Nintendo's lawyers are already in the car. Double-click and find out." },
+  { id: "feelings", name: "my_actual_feelings", kind: "Folder", status: "0 ITEMS", size: "empty", icon: "▤", preview: "Why do you care? It is empty. It has always been empty. A founder does not keep those on disk, they keep them in the pricing." },
+  { id: "mixtape", name: "mixtape_FINAL_v2_REAL_final.mp3", kind: "Audio", status: "CERTIFIED FIRE", size: "4.2 MB", icon: "♪", preview: "Seventeen tracks. Zero skips. The filename alone is a red flag and a promise. Double-click it. You are so ready. You are not ready." },
+  { id: "sys32", name: "delete_system32.bat", kind: "Script", status: "DO NOT RUN", size: "0 KB", icon: "!", preview: "One job. The filename is a warning, a dare, and a personality test. Double-clicking this is a choice you make completely alone." },
+];
+
+function renderPrankFinder() {
+  return `
+    <div class="file-explorer prank-finder" data-prank-app>
+      <header class="finder-toolbar">
+        <div class="finder-nav"><button type="button" aria-label="Back">‹</button><button type="button" aria-label="Forward">›</button></div>
+        <strong>DO_NOT_OPEN</strong>
+        <div class="finder-views" aria-hidden="true"><span>▦</span><span>☷</span><span>▥</span></div>
+        <label><span>⌕</span><input type="search" placeholder="Search files you should not open" aria-label="Search" /></label>
+      </header>
+      <div class="finder-shell">
+        <aside class="finder-sidebar">
+          <strong>FAVOURITES</strong>
+          <button type="button" class="active">⚠ DO_NOT_OPEN</button>
+          <button type="button" data-open="hack">⌘ Hack Zaid Khan OS</button>
+          <button type="button" data-open="keys">▣ api_keys.env</button>
+          <strong>LOCATIONS</strong>
+          <button type="button" data-open="files">◫ Actual Case Files</button>
+          <button type="button" data-home>⌂ Escape While You Can</button>
+        </aside>
+        <main class="finder-main">
+          <nav class="finder-breadcrumbs"><span>Zaid Khan OS</span><i>›</i><span>DO_NOT_OPEN</span></nav>
+          <div class="finder-list-head"><span>NAME</span><span>KIND</span><span>STATUS</span></div>
+          <div class="finder-list" data-prank-list>
+            ${prankFiles.map(f => `
+              <button type="button" class="finder-row" data-prank-file="${f.id}">
+                <span><i>${f.icon}</i><strong>${f.name}</strong></span><span>${f.kind}</span><span>${f.status}</span>
+              </button>`).join("")}
+          </div>
+          <p class="finder-hint" data-prank-hint>DOUBLE-CLICK TO OPEN · SINGLE-CLICK TO PREVIEW · NOTHING GOOD IS IN HERE</p>
+        </main>
+        <aside class="finder-preview" data-prank-preview>
+          <span class="finder-preview-icon">⚠</span>
+          <h3>DO_NOT_OPEN</h3>
+          <p>Six files. Zero good decisions. Single-click to read what you are about to do. Double-click to do it anyway.</p>
+        </aside>
+      </div>
+    </div>`;
+}
+
+function metric(value, label, copy, color) { return `<article class="metric-card" style="--metric:${color}"><strong>${value}</strong><span>${label}</span><p>${copy}</p></article>`; }
+function step(title, copy, color) { return `<article class="process-step" style="--step:${color}"><div><h3>${title}</h3><p>${copy}</p></div></article>`; }
+function milestone(year, title, copy, color) { return `<article class="journey-entry" style="--milestone:${color}"><time>${year}</time><div><h3>${title}</h3><p>${copy}</p></div></article>`; }
+function badge(glyph, title, copy, color) { return `<article class="badge-card" style="--badge:${color}"><span class="badge-glyph">${glyph}</span><h3>${title}</h3><p>${copy}</p></article>`; }
+function team(initials, name, role, copy, color) { return `<article class="team-card" style="--team:${color}"><span class="team-avatar">${initials}</span><h3>${name}</h3><strong>${role}</strong><p>${copy}</p></article>`; }
+function renderProofTheater() {
+  if (!proofVideos.length) {
+    return `
+      <section class="proof-theater proof-theater-empty" data-proof-theater>
+        <p class="app-deck">No testimonial videos yet. Add real YouTube video ids to the <code>proofVideos</code> array at the top of app.js and this theater fills itself in — thumbnail, player, and story card, automatically.</p>
+      </section>`;
+  }
+  const first = proofVideos[0];
+  return `
+    <section class="proof-theater" data-proof-theater>
+      <div class="proof-screen">
+        <div class="proof-screen-bar">
+          <span><i></i> NOW PLAYING</span>
+          <strong data-proof-now>${first.label}</strong>
+          <small data-proof-duration>${first.duration}</small>
+        </div>
+        <div class="proof-frame-wrap">
+          <iframe
+            data-proof-frame
+            src="https://www.youtube-nocookie.com/embed/${first.id}?rel=0&modestbranding=1"
+            title="${first.label} client testimonial"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="proof-screen-actions">
+          <button type="button" data-proof-expand aria-pressed="false">EXPAND THEATER</button>
+          <a data-proof-external href="${first.url}" target="_blank" rel="noreferrer">OPEN ON YOUTUBE ↗</a>
+        </div>
+        <div class="proof-story">
+          <small>THE STORY BEHIND THIS FILE</small>
+          <p data-proof-story>${first.story}</p>
+        </div>
+      </div>
+      <div class="proof-playlist" aria-label="Client testimonial videos">
+        ${proofVideos.map((video, index) => `
+          <button
+            class="proof-video-card ${index === 0 ? "active" : ""}"
+            type="button"
+            data-proof-video="${video.id}"
+            data-proof-label="${video.label}"
+            data-proof-duration="${video.duration}"
+            data-proof-url="${video.url}"
+            data-proof-story="${video.story}"
+            aria-pressed="${index === 0 ? "true" : "false"}"
+          >
+            <span class="proof-thumb">
+              <img src="https://i.ytimg.com/vi/${video.id}/hqdefault.jpg" alt="${video.label} YouTube thumbnail" loading="lazy" />
+              <i aria-hidden="true"></i>
+              <time>${video.duration}</time>
+            </span>
+            <span class="proof-card-copy">
+              <small>${String(index + 1).padStart(2, "0")} / CLIENT VOICE</small>
+              <strong>${video.label}</strong>
+              <em>${video.type}</em>
+            </span>
+          </button>
+        `).join("")}
+      </div>
+    </section>`;
+}
+
+function social(mark, name, copy, url, color) {
+  const sprite = {
+    YT: "./assets/premium-dock/voices.png",
+    IG: "./assets/premium-apps/socials.png",
+    X: "./assets/premium-world/data-beacon.png",
+    GH: "./assets/premium-world/data-modules.png",
+  }[mark];
+  return `<a class="social-link" href="${url}" target="_blank" rel="noreferrer" style="--social:${color}"><span class="social-monogram">${sprite ? `<img src="${sprite}" alt="">` : mark}</span><span><strong>${name}</strong><small>${copy}</small></span><b>↗</b></a>`;
+}
+
+function finishBoot() {
+  if (booted) return;
+  booted = true;
+  boot.classList.add("done");
+  os.classList.add("ready");
+  setTimeout(() => {
+    toast("SYSTEM ONLINE", "Zaid Khan OS loaded. Open an app or press ⌘K.");
+  }, 680);
+}
+
+function openApp(id, options = {}) {
+  const app = apps[id];
+  if (!app) return;
+  if (id === "testimonials" || id === "games" ) pauseMusic();
+  if (openWindows.has(id)) {
+    const existing = openWindows.get(id);
+    existing.classList.remove("minimized");
+    resumeProofMedia(existing);
+    resumeGameMedia(existing);
+    focusWindow(existing);
+    existing.focus({ preventScroll: true });
+    return;
+  }
+
+  const win = document.createElement("section");
+  win.className = "os-window";
+  win.dataset.app = id;
+  win.tabIndex = -1;
+  win.setAttribute("role", "dialog");
+  win.setAttribute("aria-modal", "false");
+  win.style.setProperty("--chrome", app.chrome);
+  const desktopWidth = window.innerWidth;
+  const baseLeft = desktopWidth > 760 ? Math.min(180 + (cascade % 5) * 34, desktopWidth - 730) : 8;
+  const baseTop = desktopWidth > 760 ? 64 + (cascade % 5) * 27 : 8;
+  win.style.left = `${Math.max(16, baseLeft)}px`;
+  win.style.top = `${baseTop}px`;
+  if (id === "browser" && desktopWidth > 760) {
+    const browserWidth = Math.min(980, desktopWidth - 56);
+    win.style.left = `${Math.max(16, (desktopWidth - browserWidth) / 2)}px`;
+    win.style.top = "48px";
+  }
+  win.style.zIndex = ++zTop;
+  cascade += 1;
+  win.innerHTML = `
+    <header class="window-titlebar">
+      <div class="window-controls">
+        <button class="window-control close" type="button" aria-label="Close ${app.title}"></button>
+        <button class="window-control min" type="button" aria-label="Minimize ${app.title}"></button>
+        <button class="window-control max" type="button" aria-label="Maximize ${app.title}"></button>
+      </div>
+      <strong class="window-title" id="window-title-${id}">${app.title}</strong>
+      <span class="window-meta">${app.subtitle}</span>
+    </header>
+    <div class="window-body">${app.render()}</div>
+    <i class="resize-handle rh-w" data-resize="w"></i>
+    <i class="resize-handle rh-e" data-resize="e"></i>
+    <i class="resize-handle rh-s" data-resize="s"></i>
+    <i class="resize-handle rh-sw" data-resize="sw"></i>
+    <i class="resize-handle rh-se" data-resize="se"></i>`;
+  layer.appendChild(win);
+  win.setAttribute("aria-labelledby", `window-title-${id}`);
+  openWindows.set(id, win);
+  document.querySelectorAll(`[data-open="${id}"]`).forEach(el => el.classList.add("open"));
+  bindWindow(win);
+  focusWindow(win);
+  win.focus({ preventScroll: true });
+  recordVisit(id, options.auto);
+}
+
+function pauseProofMedia(win) {
+  const frame = win.querySelector("[data-proof-frame]");
+  if (!frame || frame.src === "about:blank") return;
+  frame.dataset.restoreSrc = frame.src;
+  frame.src = "about:blank";
+}
+
+function resumeProofMedia(win) {
+  const frame = win.querySelector("[data-proof-frame]");
+  if (!frame?.dataset.restoreSrc) return;
+  frame.src = frame.dataset.restoreSrc;
+  delete frame.dataset.restoreSrc;
+}
+
+function pauseGameMedia(win) {
+  const frame = win.querySelector("[data-game-frame]");
+  if (!frame || frame.src === "about:blank") return;
+  frame.dataset.restoreSrc = frame.src;
+  frame.src = "about:blank";
+}
+
+function resumeGameMedia(win) {
+  const frame = win.querySelector("[data-game-frame]");
+  if (!frame?.dataset.restoreSrc) return;
+  frame.src = frame.dataset.restoreSrc;
+  delete frame.dataset.restoreSrc;
+}
+
+function bindWindow(win) {
+  const bar = win.querySelector(".window-titlebar");
+  win.addEventListener("pointerdown", () => focusWindow(win));
+  win.querySelector(".close").addEventListener("click", (event) => { event.stopPropagation(); closeWindow(win); });
+  win.querySelector(".min").addEventListener("click", (event) => {
+    event.stopPropagation();
+    pauseProofMedia(win);
+    pauseGameMedia(win);
+    win.classList.add("minimized");
+  });
+  win.querySelector(".max").addEventListener("click", (event) => { event.stopPropagation(); win.classList.toggle("maximized"); });
+  bar.addEventListener("dblclick", () => win.classList.toggle("maximized"));
+  bar.addEventListener("pointerdown", startDrag);
+  win.querySelectorAll(".resize-handle").forEach(handle => handle.addEventListener("pointerdown", startResize));
+  win.querySelectorAll("[data-copy]").forEach(button => button.addEventListener("click", () => copyText(button.dataset.copy)));
+  win.querySelectorAll("[data-project-url]").forEach(card => card.addEventListener("click", () => {
+    const url = card.dataset.projectUrl;
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+    else toast("CASE FILE", "This system is documented internally. Public deployment pending.");
+  }));
+  const browserInput = win.querySelector(".browser-toolbar input");
+  const browserFrame = win.querySelector(".browser-frame");
+  if (browserInput && browserFrame) {
+    const normalizeUrl = value => /^https?:\/\//i.test(value.trim()) ? value.trim() : `https://${value.trim()}`;
+    const navigateBrowser = value => {
+      const url = normalizeUrl(value || browserInput.value);
+      browserInput.value = url.replace(/^https?:\/\//i, "");
+      browserFrame.hidden = false;
+      win.querySelector(".browser-start").hidden = true;
+      browserFrame.src = url;
+      toast("ZAIDNET", `Loading ${url.replace(/^https?:\/\//i, "")}`);
+    };
+    win.querySelector("[data-browser-go]").addEventListener("click", () => navigateBrowser());
+    win.querySelector("[data-browser-external]").addEventListener("click", () => window.open(normalizeUrl(browserInput.value), "_blank", "noopener,noreferrer"));
+    win.querySelector("[data-browser-home]").addEventListener("click", () => {
+      browserFrame.hidden = true;
+      browserFrame.removeAttribute("src");
+      win.querySelector(".browser-start").hidden = false;
+    });
+    win.querySelectorAll("[data-browser-url]").forEach(button => button.addEventListener("click", () => navigateBrowser(button.dataset.browserUrl)));
+    browserInput.addEventListener("keydown", event => { if (event.key === "Enter") navigateBrowser(); });
+  }
+  const voiceInput = win.querySelector("[data-voice-input]");
+  if (voiceInput) bindVoiceAgent(win, voiceInput);
+  const dograhLab = win.querySelector("[data-dograh-lab]");
+  if (dograhLab) bindDograhLab(dograhLab);
+  const whiteboard = win.querySelector("[data-whiteboard]");
+  if (whiteboard) bindWhiteboard(whiteboard);
+  const fileExplorer = win.querySelector("[data-file-explorer]");
+  if (fileExplorer) bindFileExplorer(fileExplorer);
+  const proofTheater = win.querySelector("[data-proof-theater]");
+  if (proofTheater) bindProofTheater(win, proofTheater);
+  if (win.querySelector("[data-game-frame]")) bindGameRoom(win);
+  if (win.querySelector("[data-ajax-form]")) bindAjaxForms(win);
+  if (win.querySelector("[data-prank-app]")) bindPrank(win);
+  if (win.querySelector("[data-hack-terminal]")) bindHack(win);
+  if (win.querySelector("[data-run-app]")) bindRun(win);
+  win.querySelectorAll("[data-music-track]").forEach(button => button.addEventListener("click", () => {
+    selectMusicTrack(Number(button.dataset.musicTrack), true);
+  }));
+}
+
+function bindDograhLab(lab) {
+  const frame = lab.querySelector("[data-dograh-frame]");
+  const status = lab.querySelector("[data-dograh-status]");
+  const buttons = [...lab.querySelectorAll("[data-dograh-agent]")];
+  buttons.forEach(button => button.addEventListener("click", () => {
+    const agent = button.dataset.dograhAgent;
+    buttons.forEach(item => item.classList.toggle("active", item === button));
+    frame.src = `./voice-agents/?agent=${agent}`;
+    frame.title = `Zaid Khan production voice agent ${agent.padStart(2, "0")}`;
+    status.textContent = `AGENT ${agent.padStart(2, "0")} SELECTED`;
+  }));
+}
+
+function bindProofTheater(win, theater) {
+  if (theater.classList.contains("proof-theater-empty")) return;
+  const frame = theater.querySelector("[data-proof-frame]");
+  const nowPlaying = theater.querySelector("[data-proof-now]");
+  const duration = theater.querySelector("[data-proof-duration]");
+  const external = theater.querySelector("[data-proof-external]");
+  const story = theater.querySelector("[data-proof-story]");
+  const expand = theater.querySelector("[data-proof-expand]");
+  const cards = [...theater.querySelectorAll("[data-proof-video]")];
+
+  const selectVideo = card => {
+    pauseMusic();
+    cards.forEach(item => {
+      const selected = item === card;
+      item.classList.toggle("active", selected);
+      item.setAttribute("aria-pressed", String(selected));
+    });
+    nowPlaying.textContent = card.dataset.proofLabel;
+    duration.textContent = card.dataset.proofDuration;
+    external.href = card.dataset.proofUrl;
+    if (story) story.textContent = card.dataset.proofStory;
+    frame.title = `${card.dataset.proofLabel} client testimonial`;
+    delete frame.dataset.restoreSrc;
+    frame.src = `https://www.youtube-nocookie.com/embed/${card.dataset.proofVideo}?autoplay=1&rel=0&modestbranding=1`;
+    toast("PROOF LOADED", `${card.dataset.proofLabel} · ${card.dataset.proofDuration}`);
+  };
+
+  cards.forEach(card => card.addEventListener("click", () => selectVideo(card)));
+  theater.querySelectorAll(".proof-thumb img").forEach(image => image.addEventListener("error", () => {
+    image.hidden = true;
+    image.closest(".proof-thumb")?.classList.add("thumb-error");
+  }));
+  expand.addEventListener("click", () => {
+    const expanded = theater.classList.toggle("cinema-mode");
+    win.classList.toggle("proof-cinema-window", expanded);
+    expand.textContent = expanded ? "EXIT THEATER" : "EXPAND THEATER";
+    expand.setAttribute("aria-pressed", String(expanded));
+  });
+}
+
+function bindGameRoom(win) {
+  const frame = win.querySelector("[data-game-frame]");
+  const title = win.querySelector("[data-game-now]");
+  const external = win.querySelector("[data-game-external]");
+  const enterFullscreen = win.querySelector("[data-game-fullscreen]");
+  const exitFullscreen = win.querySelector("[data-game-exit-fullscreen]");
+  const allGames = win.querySelector("[data-game-all]");
+  const gallery = win.querySelector(".game-case-files");
+  win.querySelectorAll("[data-game-url]").forEach(button => button.addEventListener("click", () => {
+    const url = button.dataset.gameUrl;
+    frame.src = url;
+    delete frame.dataset.restoreSrc;
+    frame.title = `${button.dataset.gameTitle} game`;
+    title.textContent = button.dataset.gameTitle;
+    external.href = url;
+    win.querySelectorAll("[data-game-url]").forEach(item => item.classList.toggle("active", item === button));
+    toast("ARCADE LOADED", `${button.dataset.gameTitle} is ready.`);
+  }));
+  const syncFullscreen = () => {
+    const active = document.fullscreenElement === win;
+    enterFullscreen.hidden = active;
+    exitFullscreen.hidden = !active;
+    win.classList.toggle("game-fullscreen", active);
+  };
+  enterFullscreen.addEventListener("click", async () => {
+    try {
+      await win.requestFullscreen();
+      syncFullscreen();
+    } catch {
+      toast("FULLSCREEN BLOCKED", "Use the green window control or open the game in a new tab.");
+    }
+  });
+  exitFullscreen.addEventListener("click", async () => {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    syncFullscreen();
+  });
+  allGames.addEventListener("click", () => gallery?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  document.addEventListener("fullscreenchange", syncFullscreen);
+}
+
+function bindFileExplorer(explorer) {
+  const list = explorer.querySelector("[data-finder-list]");
+  const preview = explorer.querySelector("[data-finder-preview]");
+  const breadcrumbs = explorer.querySelector("[data-finder-breadcrumbs]");
+  const title = explorer.querySelector("[data-finder-title]");
+  const search = explorer.querySelector("[data-finder-search]");
+  const back = explorer.querySelector("[data-finder-back]");
+  const forward = explorer.querySelector("[data-finder-forward]");
+  let path = [];
+  let backStack = [];
+  let forwardStack = [];
+
+  const findNode = nextPath => nextPath.reduce((node, segment) => node?.children?.find(item => item.name === segment), caseFileSystem);
+  const iconFor = node => node.type === "folder" ? "▣" : node.type === "video" ? "▶" : node.type === "link" ? "↗" : node.type === "case" ? "◆" : "▤";
+  const kindFor = node => ({
+    folder: "Folder",
+    case: "Client case file",
+    video: "Video story",
+    link: "Web link",
+    document: "Read-only document"
+  }[node.type] || "File");
+
+  const showPreview = node => {
+    const clientCase = node.caseId ? clientCases.find(item => item.id === node.caseId) : null;
+    preview.replaceChildren();
+    if (clientCase) {
+      const image = document.createElement("img");
+      image.src = clientCase.image;
+      image.alt = `${clientCase.company} case-study art`;
+      const heading = document.createElement("h3");
+      heading.textContent = clientCase.company;
+      const metric = document.createElement("strong");
+      metric.textContent = `${clientCase.metric} · ${clientCase.metricLabel}`;
+      const copy = document.createElement("p");
+      copy.textContent = clientCase.outcome;
+      preview.append(image, heading, metric, copy);
+      return;
+    }
+    const glyph = document.createElement("span");
+    glyph.className = "finder-preview-icon";
+    glyph.textContent = iconFor(node);
+    const heading = document.createElement("h3");
+    heading.textContent = node.title || node.name;
+    const copy = document.createElement("p");
+    copy.textContent = node.copy || (node.type === "folder" ? `${node.children?.length || 0} items inside this folder.` : "Double-click to open this file.");
+    preview.append(glyph, heading, copy);
+    if (node.type === "video") {
+      const image = document.createElement("img");
+      image.src = `https://i.ytimg.com/vi/${node.videoId}/hqdefault.jpg`;
+      image.alt = "";
+      preview.prepend(image);
+    }
+  };
+
+  const openNode = node => {
+    if (node.type === "folder") {
+      navigate([...path, node.name]);
+      return;
+    }
+    if (node.caseId) {
+      openApp("revenue");
+      toast("CASE FILE OPEN", `${node.name} is available in Client Results.`);
+      return;
+    }
+    if (node.url) {
+      window.open(node.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (node.type === "video") {
+      window.open(node.url, "_blank", "noopener,noreferrer");
+      return;
+    }
+    showPreview(node);
+  };
+
+  const renderRows = (items, query = "") => {
+    const matches = items.filter(node => node.name.toLowerCase().includes(query.toLowerCase()));
+    list.replaceChildren();
+    matches.forEach(node => {
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "finder-row";
+      row.innerHTML = `<span><i>${iconFor(node)}</i><strong>${node.name}</strong></span><span>${kindFor(node)}</span><span>${node.type === "folder" ? `${node.children?.length || 0} ITEMS` : "READY"}</span>`;
+      row.addEventListener("click", () => {
+        list.querySelectorAll(".finder-row").forEach(item => item.classList.toggle("selected", item === row));
+        showPreview(node);
+      });
+      row.addEventListener("dblclick", () => openNode(node));
+      list.append(row);
+    });
+    if (!matches.length) {
+      const empty = document.createElement("p");
+      empty.className = "finder-empty";
+      empty.textContent = "No files match this search.";
+      list.append(empty);
+    }
+  };
+
+  const render = () => {
+    const node = findNode(path) || caseFileSystem;
+    title.textContent = node.name;
+    breadcrumbs.replaceChildren();
+    ["Zaid Khan OS", ...path].forEach((segment, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = segment;
+      button.addEventListener("click", () => navigate(path.slice(0, index)));
+      breadcrumbs.append(button);
+    });
+    renderRows(node.children || [], search.value);
+    back.disabled = !backStack.length;
+    forward.disabled = !forwardStack.length;
+  };
+
+  function navigate(nextPath, record = true) {
+    if (!findNode(nextPath)) return;
+    if (record) {
+      backStack.push(path);
+      forwardStack = [];
+    }
+    path = nextPath;
+    search.value = "";
+    render();
+  }
+
+  back.addEventListener("click", () => {
+    if (!backStack.length) return;
+    forwardStack.push(path);
+    path = backStack.pop();
+    render();
+  });
+  forward.addEventListener("click", () => {
+    if (!forwardStack.length) return;
+    backStack.push(path);
+    path = forwardStack.pop();
+    render();
+  });
+  search.addEventListener("input", () => render());
+  explorer.querySelectorAll("[data-finder-path]").forEach(button => button.addEventListener("click", () => {
+    const next = button.dataset.finderPath ? [button.dataset.finderPath] : [];
+    navigate(next);
+  }));
+  render();
+}
+
+function bindWhiteboard(boardApp) {
+  const storageKey = "zaid-os-whiteboard-v1";
+  const board = boardApp.querySelector("[data-note-board]");
+  const form = boardApp.querySelector("[data-note-form]");
+  const input = boardApp.querySelector("[data-note-input]");
+  const colors = ["#fff38a", "#f7b5cc", "#b9e4f0", "#c7f36b", "#d5c8f4"];
+  let notes;
+  try {
+    notes = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    if (!Array.isArray(notes)) notes = [];
+  } catch {
+    notes = [];
+  }
+
+  const save = () => localStorage.setItem(storageKey, JSON.stringify(notes.slice(0, 24)));
+  const render = () => {
+    board.replaceChildren();
+    notes.forEach(note => {
+      const card = document.createElement("article");
+      const grip = document.createElement("button");
+      const area = document.createElement("textarea");
+      const remove = document.createElement("button");
+      card.className = "board-note";
+      card.style.left = `${note.x}px`;
+      card.style.top = `${note.y}px`;
+      card.style.background = note.color;
+      card.style.transform = `rotate(${note.rotation}deg)`;
+      grip.type = "button";
+      grip.className = "note-grip";
+      grip.textContent = "DRAG NOTE";
+      grip.setAttribute("aria-label", "Drag sticky note");
+      area.value = note.text;
+      area.maxLength = 180;
+      area.setAttribute("aria-label", "Sticky note text");
+      remove.type = "button";
+      remove.className = "note-delete";
+      remove.textContent = "×";
+      remove.setAttribute("aria-label", "Delete sticky note");
+      card.append(grip, area, remove);
+      board.append(card);
+
+      area.addEventListener("input", () => {
+        note.text = area.value;
+        save();
+      });
+      remove.addEventListener("click", () => {
+        notes = notes.filter(item => item.id !== note.id);
+        save();
+        render();
+      });
+      grip.addEventListener("pointerdown", event => {
+        event.stopPropagation();
+        grip.setPointerCapture(event.pointerId);
+        const start = { x: event.clientX, y: event.clientY, left: note.x, top: note.y };
+        const move = moveEvent => {
+          const maxX = Math.max(0, board.clientWidth - card.offsetWidth);
+          const maxY = Math.max(0, board.clientHeight - card.offsetHeight);
+          note.x = Math.max(0, Math.min(maxX, start.left + moveEvent.clientX - start.x));
+          note.y = Math.max(0, Math.min(maxY, start.top + moveEvent.clientY - start.y));
+          card.style.left = `${note.x}px`;
+          card.style.top = `${note.y}px`;
+        };
+        const end = () => {
+          grip.removeEventListener("pointermove", move);
+          save();
+        };
+        grip.addEventListener("pointermove", move);
+        grip.addEventListener("pointerup", end, { once: true });
+        grip.addEventListener("pointercancel", end, { once: true });
+      });
+    });
+  };
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    const index = notes.length;
+    notes.push({
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      text,
+      x: 18 + (index % 4) * 155,
+      y: 18 + (index % 3) * 128,
+      color: colors[index % colors.length],
+      rotation: [-2, 1, -1, 2][index % 4],
+    });
+    input.value = "";
+    save();
+    render();
+  });
+
+  boardApp.querySelector("[data-reset-desktop]").addEventListener("click", () => {
+    localStorage.removeItem("zaid-os-desktop-layout-v1");
+    document.querySelectorAll(".desktop-app").forEach(button => {
+      button.style.removeProperty("transform");
+      button.classList.remove("arranged");
+    });
+    toast("DESKTOP RESET", "Application icons returned to their original grid.");
+  });
+  render();
+}
+
+function encodeForm(form) {
+  return new URLSearchParams(new FormData(form)).toString();
+}
+
+function mailFallback(form) {
+  const data = Object.fromEntries(new FormData(form));
+  const subject = data["form-name"] === "video-suggestion" ? "Video suggestion for Zaid Khan" : "Garage Mail for Zaid Khan";
+  const message = data.message || data.suggestion || "";
+  return `mailto:primecommercewebdevelopment@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`${message}\n\nFrom: ${data.name || ""} <${data.email || ""}>`)}`;
+}
+
+function bindAjaxForms(win) {
+  win.querySelectorAll("[data-ajax-form]").forEach(form => form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const status = form.querySelector("[data-form-status]");
+    const submit = form.querySelector('button[type="submit"]');
+    if (!form.reportValidity()) return;
+    status.textContent = "TRANSMITTING…";
+    submit.disabled = true;
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeForm(form),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const formName = form.querySelector('[name="form-name"]').value;
+      status.textContent = formName === "video-suggestion" ? "IDEA QUEUED. THANK YOU." : "MESSAGE DELIVERED TO ZAID.";
+      toast("GARAGE MAIL", "Transmission received. Zaid Khan has your note.");
+      form.reset();
+    } catch {
+      status.textContent = "NETLIFY IS NOT ACTIVE HERE. ";
+      const fallback = document.createElement("a");
+      fallback.href = mailFallback(form);
+      fallback.textContent = "SEND BY EMAIL ↗";
+      status.appendChild(fallback);
+    } finally {
+      submit.disabled = false;
+    }
+  }));
+}
+
+function bindPrank(win) {
+  const preview = win.querySelector("[data-prank-preview]");
+  const hint = win.querySelector("[data-prank-hint]");
+  const rows = [...win.querySelectorAll("[data-prank-file]")];
+  let mixtapeClicks = 0;
+  const showPreview = file => {
+    preview.innerHTML = `
+      <span class="finder-preview-icon">${file.icon}</span>
+      <h3>${file.name}</h3>
+      <p class="finder-preview-meta">${file.kind} · ${file.size} · ${file.status}</p>
+      <p>${file.preview}</p>
+      <button type="button" class="finder-preview-open" data-prank-open="${file.id}">OPEN IT ANYWAY ↗</button>`;
+    preview.querySelector("[data-prank-open]")?.addEventListener("click", () => openPrankFile(file.id));
+  };
+  const openPrankFile = id => {
+    if (id === "keys") { toast("api_keys.env", "Opening the definitely-real secrets..."); openApp("keys"); }
+    else if (id === "xxx") { toast("BUSTED", "You actually double-clicked that. On a founder's portfolio. Enjoy."); if (hint) hint.textContent = "There is no going back from what you just tried to open."; openRickroll("definitely_not_xxx.mp4"); }
+    else if (id === "pokemon") { toast("NINTENDO HAS BEEN NOTIFIED", "Loading pokemon_emerald_ROM_legit.gba..."); if (hint) hint.textContent = "The lawyers are outside. Do not answer the door."; openRickroll("pokemon_emerald_ROM_legit.gba"); }
+    else if (id === "mixtape") {
+      mixtapeClicks += 1;
+      if (mixtapeClicks === 1) { toast("PLAYBACK DENIED", "The mixtape is too powerful for browser speakers. Double-click again if you insist."); if (hint) hint.textContent = "Double-click it once more if you truly believe you are ready."; }
+      else { toast("FINE. PLAYING IT.", "You asked for this."); openRickroll("mixtape_FINAL_v2_REAL_final.mp3"); }
+    }
+    else if (id === "feelings") { toast("my_actual_feelings", "The folder is empty. Why do you care?"); if (hint) hint.textContent = "0 items. A founder keeps those in the pricing, not on disk."; }
+    else if (id === "sys32") { toast("FATAL DECISION", "Running delete_system32.bat... you did this."); if (hint) hint.textContent = "You ran it. This is on you and you alone."; setTimeout(() => powerDown("delete_system32.bat completed successfully. Congratulations, hacker."), 950); }
+  };
+  rows.forEach(row => {
+    const file = prankFiles.find(f => f.id === row.dataset.prankFile);
+    row.addEventListener("click", () => {
+      rows.forEach(r => r.classList.remove("selected"));
+      row.classList.add("selected");
+      showPreview(file);
+    });
+    row.addEventListener("dblclick", () => openPrankFile(file.id));
+  });
+}
+
+function openRickroll(label) {
+  openApp("rickroll");
+  setTimeout(() => {
+    const win = openWindows.get("rickroll");
+    if (!win) return;
+    const labelEl = win.querySelector("[data-rickroll-label]");
+    if (labelEl) labelEl.textContent = `now playing: ${label || "your file"}`;
+  }, 60);
+}
+
+function bindRun(win) {
+  const canvas = win.querySelector("[data-run-canvas]");
+  const ctx = canvas.getContext("2d");
+  const overlay = win.querySelector("[data-run-overlay]");
+  const overTitle = win.querySelector("[data-run-over-title]");
+  const overCopy = win.querySelector("[data-run-over-copy]");
+  const scoreEl = win.querySelector("[data-run-score]");
+  const bestEl = win.querySelector("[data-run-best]");
+  const W = canvas.width, H = canvas.height, GROUND = H - 48;
+  const zaidImg = new Image();
+  zaidImg.src = "./assets/placeholder-sprite.png";
+  const OBSTACLES = ["BUG", "SCAM", "MEETING", "DOUBT", "TAX"];
+  const QUIPS = [
+    "A meeting got you. It happens to the best of us.",
+    "Scammed again. At least this one was free.",
+    "The bug won this round. Ship it anyway.",
+    "Doubt is undefeated at close range. Run it back.",
+    "Taxes. The one boss you cannot dodge forever.",
+  ];
+  let best = Number(localStorage.getItem("zaid-os-run-best") || 0);
+  bestEl.textContent = best;
+  let state = "idle";
+  let player, obstacles, coins, platforms, speed, score, jumps, spawnTimer, coinTimer, platTimer, raf, lastQuip = "";
+  const reset = () => {
+    player = { x: 70, y: GROUND, vy: 0, w: 30, h: 42, onGround: true };
+    obstacles = []; coins = []; platforms = []; speed = 4.2; score = 0; jumps = 0;
+    spawnTimer = 50; coinTimer = 70; platTimer = 120;
+  };
+  const jump = () => {
+    if (state === "idle" || state === "over") { start(); return; }
+    if (player.onGround) { player.vy = -13.6; player.onGround = false; jumps = 1; }
+    else if (jumps < 2) { player.vy = -11.6; jumps = 2; }
+  };
+  const start = () => {
+    reset();
+    state = "running";
+    overlay.classList.add("hidden");
+    cancelAnimationFrame(raf);
+    loop();
+  };
+  const gameOver = () => {
+    state = "over";
+    if (Math.floor(score) > best) { best = Math.floor(score); localStorage.setItem("zaid-os-run-best", best); bestEl.textContent = best; }
+    lastQuip = QUIPS[Math.floor(score) % QUIPS.length];
+    overTitle.textContent = `RUN OVER · ${Math.floor(score)}`;
+    overCopy.textContent = lastQuip + " Press space or tap to run it back.";
+    overlay.classList.remove("hidden");
+  };
+  const rect = (x, y, w, h, fill) => { ctx.fillStyle = fill; ctx.fillRect(x, y, w, h); };
+  const loop = () => {
+    if (state !== "running") return;
+    ctx.clearRect(0, 0, W, H);
+    // sky + hills
+    rect(0, 0, W, H, "#fbe3ec");
+    rect(0, GROUND + player.h, W, H, "#efd0b7");
+    ctx.fillStyle = "rgba(247,169,189,.55)";
+    for (let i = 0; i < 5; i++) { const hx = (i * 190 - (score * 0.9) % 190) - 40; ctx.beginPath(); ctx.moveTo(hx, GROUND + player.h); ctx.lineTo(hx + 90, GROUND + player.h - 60); ctx.lineTo(hx + 180, GROUND + player.h); ctx.fill(); }
+    ctx.fillStyle = "rgba(123,22,53,.16)";
+    for (let i = 0; i < 6; i++) { const cx = (i * 150 - (score * 1.4) % 150); ctx.fillRect(cx, 40 + (i % 2) * 22, 46, 14); }
+    // ground brick line
+    ctx.fillStyle = "#17131b"; ctx.fillRect(0, GROUND + player.h, W, 4);
+    ctx.fillStyle = "rgba(123,22,53,.25)";
+    for (let i = 0; i < W / 40 + 1; i++) { const bx = (i * 40 - (score * speed) % 40); ctx.fillRect(bx, GROUND + player.h + 6, 2, 10); }
+    // physics + platform landing (one-way from above)
+    const prevBottom = player.y + player.h;
+    player.vy += 0.66; player.y += player.vy;
+    player.onGround = false;
+    platforms.forEach(p => {
+      const withinX = player.x + player.w > p.x + 4 && player.x < p.x + p.w - 4;
+      if (withinX && player.vy >= 0 && prevBottom <= p.y + 6 && player.y + player.h >= p.y) {
+        player.y = p.y - player.h; player.vy = 0; player.onGround = true; jumps = 0;
+      }
+    });
+    if (player.y >= GROUND) { player.y = GROUND; player.vy = 0; player.onGround = true; jumps = 0; }
+    // draw player
+    if (zaidImg.complete && zaidImg.naturalWidth) ctx.drawImage(zaidImg, player.x - 8, player.y - 6, 46, player.h + 10);
+    else rect(player.x, player.y, player.w, player.h, "#7b1635");
+    // spawn floating platforms
+    if (--platTimer <= 0) {
+      const py = GROUND - 40 - Math.random() * 90;
+      const pw = 70 + Math.random() * 70;
+      platforms.push({ x: W + 30, y: py, w: pw });
+      // a coin sitting on the platform
+      coins.push({ x: W + 30 + pw / 2, y: py - 22, r: 11, got: false });
+      platTimer = 150 + Math.random() * 120;
+    }
+    // spawn ground obstacles (goombas)
+    if (--spawnTimer <= 0) {
+      const label = OBSTACLES[Math.floor(Math.random() * OBSTACLES.length)];
+      const h = 30 + Math.random() * 24;
+      obstacles.push({ x: W + 20, y: GROUND + player.h - h, w: 28 + label.length * 3, h, label });
+      spawnTimer = Math.max(42, 96 - speed * 5) + Math.random() * 34;
+    }
+    // spawn low coins
+    if (--coinTimer <= 0) {
+      coins.push({ x: W + 20, y: GROUND - 30 - Math.random() * 40, r: 11, got: false });
+      coinTimer = 120 + Math.random() * 90;
+    }
+    // platforms
+    platforms.forEach(p => {
+      p.x -= speed;
+      rect(p.x, p.y, p.w, 14, "#c7f36b");
+      ctx.fillStyle = "#17131b"; ctx.fillRect(p.x, p.y, p.w, 3); ctx.fillRect(p.x, p.y + 11, p.w, 3);
+    });
+    platforms = platforms.filter(p => p.x + p.w > -10);
+    // obstacles
+    ctx.font = "bold 9px 'Silkscreen', monospace";
+    obstacles.forEach(o => {
+      o.x -= speed;
+      rect(o.x, o.y, o.w, o.h, "#17131b");
+      ctx.fillStyle = "#ff6b63"; ctx.fillRect(o.x + 3, o.y + 3, o.w - 6, 4);
+      ctx.fillStyle = "#fff8dc"; ctx.textAlign = "center";
+      ctx.fillText(o.label, o.x + o.w / 2, o.y + o.h / 2 + 3);
+      if (player.x < o.x + o.w - 6 && player.x + player.w > o.x + 6 && player.y + player.h > o.y + 4) gameOver();
+    });
+    obstacles = obstacles.filter(o => o.x + o.w > -10);
+    // coins
+    coins.forEach(c => {
+      c.x -= speed;
+      if (!c.got) {
+        ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffd95a"; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#17131b"; ctx.stroke();
+        ctx.fillStyle = "#17131b"; ctx.textAlign = "center"; ctx.font = "bold 11px 'Silkscreen', monospace";
+        ctx.fillText("₹", c.x, c.y + 4);
+        const dx = player.x + player.w / 2 - c.x, dy = player.y + player.h / 2 - c.y;
+        if (Math.hypot(dx, dy) < c.r + 20) { c.got = true; score += 15; }
+      }
+    });
+    coins = coins.filter(c => c.x > -20 && !c.got);
+    // score + speed
+    score += 0.16; speed += 0.0016;
+    scoreEl.textContent = Math.floor(score);
+    raf = requestAnimationFrame(loop);
+  };
+  // controls
+  const keyHandler = e => {
+    if (!win.isConnected) { window.removeEventListener("keydown", keyHandler); return; }
+    if (!win.classList.contains("focused")) return;
+    if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); jump(); }
+  };
+  window.addEventListener("keydown", keyHandler);
+  canvas.addEventListener("pointerdown", e => { e.preventDefault(); jump(); });
+  win.querySelector("[data-run-start]")?.addEventListener("click", start);
+  reset();
+  // idle preview frame
+  ctx.clearRect(0, 0, W, H); rect(0, 0, W, H, "#fbe3ec"); rect(0, GROUND + 42, W, H, "#efd0b7");
+  ctx.fillStyle = "#17131b"; ctx.fillRect(0, GROUND + 42, W, 3);
+  const drawIdle = () => { if (zaidImg.complete && zaidImg.naturalWidth) ctx.drawImage(zaidImg, 62, GROUND - 6, 46, 52); };
+  if (zaidImg.complete) drawIdle(); else zaidImg.onload = drawIdle;
+}
+
+function bindHack(win) {
+  const output = win.querySelector("[data-hack-output]");
+  const input = win.querySelector("[data-hack-input]");
+  let hacking = false;
+  const print = (text, cls) => {
+    const line = document.createElement("p");
+    if (cls) line.className = cls;
+    line.innerHTML = text;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+  };
+  const sequence = (lines, done) => {
+    hacking = true;
+    let index = 0;
+    const tick = () => {
+      if (index >= lines.length) { hacking = false; done?.(); return; }
+      print(lines[index][0], lines[index][1]);
+      index += 1;
+      setTimeout(tick, 420 + Math.random() * 380);
+    };
+    tick();
+  };
+  const commands = {
+    help: () => print("Commands: <b>ls</b>, <b>whoami</b>, <b>passwd</b>, <b>hack</b>, <b>steal keys</b>, <b>play</b>, <b>sudo make-me-rich</b>, <b>clear</b>, <b>exit</b>"),
+    ls: () => print("api_keys.env&nbsp;&nbsp;bank_details.txt&nbsp;&nbsp;definitely_not_a_honeypot/&nbsp;&nbsp;vibes.config"),
+    whoami: () => print("script_kiddie_" + Math.floor(100 + Math.random() * 900)),
+    passwd: () => print("Hint: it is NOT examplepass1. Not that easy."),
+    clear: () => { output.innerHTML = ""; },
+    exit: () => { print("Session logged. Your IP has been reported to Zaid Khan's mom."); setTimeout(() => closeWindow(win), 1400); },
+    "sudo make-me-rich": () => print("Permission granted. Step 1: close this window and go build something."),
+    play: () => { print("Loading hidden arcade: FOUNDER RUN..."); setTimeout(() => openApp("run"), 500); },
+    run: () => { print("Loading hidden arcade: FOUNDER RUN..."); setTimeout(() => openApp("run"), 500); },
+  };
+  const runHack = () => sequence([
+    ["Scanning therealzaidkhan.co.uk for vulnerabilities...", ""],
+    ["Found 0 open ports. Found 1 open personality.", ""],
+    ["Bypassing vibe-coded authentication layer...", ""],
+    ["Trying password: examplepass1... <b>REJECTED</b>", ""],
+    ["Trying password: password123... <b>REJECTED (embarrassing for you)</b>", ""],
+    ["Brute-forcing with 4.2 million leaked passwords...", ""],
+    ["ACCESS GRANTED. Downloading api_keys.env...", "hack-success"],
+  ], () => {
+    print("Wait. These keys look...", "");
+    setTimeout(() => { openApp("keys"); print("Fake. They were fake the whole time. Real secrets never ship to the browser.", "hack-success"); }, 900);
+  });
+  input.addEventListener("keydown", event => {
+    if (event.key !== "Enter" || hacking) return;
+    const raw = input.value.trim();
+    if (!raw) return;
+    print(`root@zaidos:~$ ${raw}`, "hack-echo");
+    input.value = "";
+    const cmd = raw.toLowerCase();
+    if (commands[cmd]) commands[cmd]();
+    else if (/^(hack|sudo hack|attack|breach|exploit)$/.test(cmd)) runHack();
+    else if (/steal|keys|api/.test(cmd)) runHack();
+    else if (/rm -rf|format|delete/.test(cmd)) { print("Nice try. That trick is older than this founder."); }
+    else if (/hello|hi|hey/.test(cmd)) print("This is a hacking terminal, not a networking event.");
+    else print(`'${raw}' is not recognized. Neither is your hacking ability. Type <b>help</b>.`);
+  });
+  setTimeout(() => input.focus({ preventScroll: true }), 300);
+}
+
+function updateMusicDeck() {
+  if (!musicDeck || !musicAudio) return;
+  const track = musicTracks[musicIndex];
+  musicDeck.querySelector("[data-music-title]").textContent = track.title;
+  musicDeck.querySelector("[data-music-artist]").textContent = track.artist;
+  musicDeck.querySelector("[data-music-play]").textContent = musicAudio.paused ? "▶ PLAY" : "❚❚ PAUSE";
+  musicDeck.querySelector("[data-music-play]").setAttribute("aria-pressed", String(!musicAudio.paused));
+  musicToggle?.classList.toggle("is-playing", !musicAudio.paused);
+  const launcherLabel = musicToggle?.querySelector("[data-music-launcher-label]");
+  if (launcherLabel) launcherLabel.textContent = musicAudio.paused ? "MUSIC" : "PLAYING";
+  document.querySelectorAll("[data-music-track]").forEach(button => button.classList.toggle("active", Number(button.dataset.musicTrack) === musicIndex));
+}
+
+function setMusicDeckOpen(isOpen) {
+  if (!musicDeck || !musicToggle) return;
+  musicDeck.hidden = !isOpen;
+  musicToggle.classList.toggle("is-open", isOpen);
+  musicToggle.setAttribute("aria-expanded", String(isOpen));
+  if (isOpen) musicDeck.querySelector("[data-music-play]")?.focus({ preventScroll: true });
+}
+
+function selectMusicTrack(index, shouldPlay = false) {
+  if (!musicAudio) return;
+  musicIndex = (index + musicTracks.length) % musicTracks.length;
+  const track = musicTracks[musicIndex];
+  musicAudio.src = track.src;
+  musicAudio.load();
+  updateMusicDeck();
+  if (shouldPlay) playMusic();
+}
+
+function playMusic() {
+  if (!musicAudio) return;
+  openWindows.forEach(win => pauseProofMedia(win));
+  if (!musicAudio.src) selectMusicTrack(musicIndex);
+  musicAudio.play().then(() => {
+    updateMusicDeck();
+    toast("SOUND DECK", `${musicTracks[musicIndex].title} is playing.`);
+  }).catch(() => toast("AUDIO BLOCKED", "Tap PLAY again to allow audio in this browser."));
+}
+
+function pauseMusic() {
+  if (!musicAudio) return;
+  musicAudio.pause();
+  updateMusicDeck();
+}
+
+function toggleMusic() {
+  if (!musicAudio) return;
+  musicAudio.paused ? playMusic() : pauseMusic();
+}
+
+function bindVoiceAgent(win, voiceInput) {
+  const transcript = win.querySelector("[data-voice-transcript]");
+  const status = win.querySelector("[data-voice-status]");
+  const mic = win.querySelector("[data-voice-mic]");
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let recognition;
+
+  const addLine = (role, copy) => {
+    const line = document.createElement("p");
+    line.className = role === "YOU" ? "user-line" : "agent-line";
+    const strong = document.createElement("strong");
+    const span = document.createElement("span");
+    strong.textContent = role;
+    span.textContent = copy;
+    line.append(strong, span);
+    transcript.appendChild(line);
+    transcript.scrollTop = transcript.scrollHeight;
+  };
+
+  const speak = copy => {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(copy);
+    utterance.rate = 1.05;
+    utterance.pitch = .94;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const answer = query => {
+    const clean = query.trim();
+    if (!clean) {
+      status.textContent = "TYPE OR SAY SOMETHING FIRST";
+      return;
+    }
+    addLine("YOU", clean);
+    const q = clean.toLowerCase();
+    let response = "I can open projects, results, systems, testimonials, the journey, Founder.txt, socials, browser, or the emergency contact channel.";
+    let target;
+    if (/project|ship|work/.test(q)) {
+      response = "Opening the shipped project files.";
+      target = "projects";
+    } else if (/result|revenue|number|proof|money/.test(q)) {
+      response = "Opening public results and inspectable proof. Internal company revenue stays private.";
+      target = "revenue";
+    } else if (/system|process|how.*work/.test(q)) {
+      response = "Opening the operating loop and delivery process.";
+      target = "process";
+    } else if (/testimonial|client|voice.*proof/.test(q)) {
+      response = "Opening the client testimonial videos.";
+      target = "testimonials";
+    } else if (/journey|timeline|2015|milestone/.test(q)) {
+      response = "Opening Zaid Khan's public journey and milestone file.";
+      target = "journey";
+    } else if (/founder|note|who.*(you|founder)|about/.test(q)) {
+      response = "Opening Founder dot text—the plain-language note behind the operating system.";
+      target = "founder";
+    } else if (/instagram|social|youtube|github|twitter|\\bx\\b/.test(q)) {
+      response = "Opening the live social channels. LinkedIn is intentionally not listed.";
+      target = "socials";
+    } else if (/contact|call|whatsapp|emergency|hire|start/.test(q)) {
+      response = "Opening the priority contact channel. You can WhatsApp, call, email, or book thirty minutes.";
+      target = "emergency";
+    } else if (/browser|web|internet/.test(q)) {
+      response = "Opening ZaidNet, the built-in browser surface.";
+      target = "browser";
+    }
+    addLine("ZAID KHAN OS", response);
+    status.textContent = "COMMAND COMPLETE";
+    speak(response);
+    if (target) setTimeout(() => openApp(target), 420);
+  };
+
+  win.querySelector("[data-voice-send]").addEventListener("click", () => {
+    answer(voiceInput.value);
+    voiceInput.value = "";
+  });
+  voiceInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      answer(voiceInput.value);
+      voiceInput.value = "";
+    }
+  });
+  win.querySelectorAll("[data-voice-prompt]").forEach(button => button.addEventListener("click", () => answer(button.dataset.voicePrompt)));
+
+  if (Recognition) {
+    recognition = new Recognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.addEventListener("start", () => {
+      mic.classList.add("listening");
+      mic.textContent = "LISTENING...";
+      status.textContent = "MICROPHONE LIVE";
+    });
+    recognition.addEventListener("result", event => answer(event.results[0][0].transcript));
+    recognition.addEventListener("error", event => {
+      status.textContent = `MIC ERROR: ${event.error.toUpperCase()}`;
+      addLine("ZAID KHAN OS", "Microphone access failed. You can still type your command below.");
+    });
+    recognition.addEventListener("end", () => {
+      mic.classList.remove("listening");
+      mic.textContent = "HOLD TO TALK";
+    });
+    mic.addEventListener("click", () => recognition.start());
+  } else {
+    mic.disabled = true;
+    mic.textContent = "VOICE UNSUPPORTED";
+    status.textContent = "TYPE MODE READY";
+  }
+}
+
+function startDrag(event) {
+  if (window.innerWidth <= 760 || event.target.closest(".window-controls")) return;
+  const win = event.currentTarget.closest(".os-window");
+  if (win.classList.contains("maximized")) return;
+  const rect = win.getBoundingClientRect();
+  dragState = { win, x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
+  event.currentTarget.setPointerCapture(event.pointerId);
+}
+window.addEventListener("pointermove", event => {
+  if (!dragState) return;
+  const { win, x, y, left, top } = dragState;
+  const nextLeft = Math.max(0, Math.min(window.innerWidth - 120, left + event.clientX - x));
+  const nextTop = Math.max(0, Math.min(window.innerHeight - 110, top + event.clientY - y - 38));
+  win.style.left = `${nextLeft}px`;
+  win.style.top = `${nextTop}px`;
+});
+window.addEventListener("pointerup", () => { dragState = null; });
+
+let resizeState = null;
+function startResize(event) {
+  if (window.innerWidth <= 760) return;
+  const win = event.currentTarget.closest(".os-window");
+  if (win.classList.contains("maximized")) return;
+  event.stopPropagation();
+  const rect = win.getBoundingClientRect();
+  resizeState = {
+    win,
+    dir: event.currentTarget.dataset.resize,
+    x: event.clientX,
+    y: event.clientY,
+    left: rect.left,
+    top: rect.top,
+    width: rect.width,
+    height: rect.height,
+  };
+  event.currentTarget.setPointerCapture(event.pointerId);
+}
+window.addEventListener("pointermove", event => {
+  if (!resizeState) return;
+  const { win, dir, x, y, left, top, width, height } = resizeState;
+  const dx = event.clientX - x;
+  const dy = event.clientY - y;
+  const minWidth = 420;
+  const minHeight = 280;
+  if (dir.includes("e")) {
+    const maxWidth = window.innerWidth - left - 8;
+    win.style.width = `${Math.max(minWidth, Math.min(maxWidth, width + dx))}px`;
+  }
+  if (dir.includes("w")) {
+    const maxWidth = left + width - 8;
+    const nextWidth = Math.max(minWidth, Math.min(maxWidth, width - dx));
+    win.style.width = `${nextWidth}px`;
+    win.style.left = `${left + width - nextWidth}px`;
+  }
+  if (dir.includes("s")) {
+    const maxHeight = window.innerHeight - top - 8;
+    win.style.height = `${Math.max(minHeight, Math.min(maxHeight, height + dy))}px`;
+  }
+});
+window.addEventListener("pointerup", () => { resizeState = null; });
+
+function focusWindow(win) {
+  document.querySelectorAll(".os-window").forEach(item => item.classList.remove("focused"));
+  win.classList.add("focused");
+  win.style.zIndex = ++zTop;
+}
+function closeWindow(win) {
+  const id = win.dataset.app;
+  win.style.opacity = "0";
+  win.style.transform = "scale(.92)";
+  setTimeout(() => win.remove(), 150);
+  openWindows.delete(id);
+  document.querySelectorAll(`[data-open="${id}"]`).forEach(el => el.classList.remove("open"));
+}
+function closeFocused() {
+  const focused = document.querySelector(".os-window.focused");
+  if (focused) closeWindow(focused);
+}
+function showDesktop() {
+  openWindows.forEach(win => {
+    pauseProofMedia(win);
+    pauseGameMedia(win);
+    win.classList.add("minimized");
+  });
+  toast("SHOW DESKTOP", "All windows minimized. Click an open app to restore it.");
+}
+
+function jumpTo(id) {
+  const section = document.querySelector(`#${id}`);
+  if (!section) return;
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (playerLabel) playerLabel.textContent = districtLabels[id] || "ZAID · ONLINE";
+}
+
+function renderPlayer() {
+  if (!worldPlayer || !playerSprite) return;
+  const scale = window.innerWidth <= 760 ? .78 : 1;
+  worldPlayer.style.transform = `translate3d(${playerState.x}px, ${playerState.y}px, 0) scale(${scale})`;
+  playerSprite.src = spriteSources[playerState.direction];
+  worldPlayer.classList.toggle("facing-left", playerState.direction === "left");
+  worldPlayer.classList.add("walking");
+  clearTimeout(walkTimer);
+  walkTimer = setTimeout(() => worldPlayer.classList.remove("walking"), 1900);
+}
+
+function syncWorld() {
+  if (playerLabel) playerLabel.textContent = "ZAID · HOME BASE";
+}
+
+function patrolWaypoints() {
+  const mobile = window.innerWidth <= 760;
+  const x = window.innerWidth;
+  const y = window.innerHeight;
+  return mobile
+    ? [
+        { x: 0, y: 0, label: "ZAID · HOME BASE" },
+        { x: -x * .18, y: -y * .08, label: "ZAID · CHECKING FILES" },
+        { x: x * .12, y: -y * .15, label: "ZAID · SHIPPING" },
+        { x: x * .04, y: -y * .02, label: "ZAID · ONLINE" },
+      ]
+    : [
+        { x: 0, y: 0, label: "ZAID · HOME BASE" },
+        { x: -x * .17, y: -y * .04, label: "ZAID · CHECKING FILES" },
+        { x: -x * .08, y: -y * .19, label: "ZAID · BUILDING" },
+        { x: x * .16, y: -y * .16, label: "ZAID · SHIPPING" },
+        { x: x * .08, y: -y * .03, label: "ZAID · BACK ONLINE" },
+      ];
+}
+
+function autoPatrol() {
+  if (!worldPlayer || !playerSprite) return;
+  if (playerState.paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const waypoints = patrolWaypoints();
+  playerState.waypoint = (playerState.waypoint + 1) % waypoints.length;
+  const target = waypoints[playerState.waypoint];
+  const deltaX = target.x - playerState.x;
+  const deltaY = target.y - playerState.y;
+  playerState.direction = Math.abs(deltaX) > Math.abs(deltaY)
+    ? (deltaX < 0 ? "left" : "right")
+    : (deltaY < 0 ? "up" : "down");
+  playerState.x = target.x;
+  playerState.y = target.y;
+  playerLabel.textContent = target.label;
+  renderPlayer();
+}
+
+function waveHello() {
+  if (!worldPlayer || !playerSprite) return;
+  playerState.paused = true;
+  worldPlayer.classList.remove("walking");
+  worldPlayer.classList.add("waving");
+  playerSprite.src = spriteSources.down;
+  worldPlayer.classList.remove("facing-left");
+  playerLabel.textContent = "ZAID · HEY THERE!";
+  toast("PLAYER 01", "Zaid Khan waved. He is getting back to work.");
+  setTimeout(() => {
+    worldPlayer.classList.remove("waving");
+    playerState.paused = false;
+    playerLabel.textContent = "ZAID · BACK TO WORK";
+    autoPatrol();
+  }, 1450);
+}
+
+function recordVisit(id, silent = false) {
+  const before = visits.size;
+  visits.add(id);
+  localStorage.setItem("zaid-os-visits", JSON.stringify([...visits]));
+  if (!silent && visits.size > before) toast("APP DISCOVERED", `${apps[id].title} added to your session.`);
+  if (visits.size === Object.keys(apps).length) toast("ACHIEVEMENT UNLOCKED", "FULL SYSTEM TOUR — you found every Zaid Khan OS app.");
+}
+
+function toast(title, message) {
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.innerHTML = `<strong>${title}</strong><span>${message}</span>`;
+  document.querySelector("#toast-stack").appendChild(el);
+  setTimeout(() => { el.style.opacity = "0"; el.style.transform = "translateX(20px)"; }, 3600);
+  setTimeout(() => el.remove(), 3950);
+}
+
+async function copyText(value) {
+  try {
+    await navigator.clipboard.writeText(value);
+    toast("COPIED", `${value} is on your clipboard.`);
+  } catch {
+    toast("COPY FAILED", `Use this address: ${value}`);
+  }
+}
+
+function openPalette() {
+  palette.classList.add("open");
+  palette.setAttribute("aria-hidden", "false");
+  commandInput.value = "";
+  renderCommands("");
+  setTimeout(() => commandInput.focus(), 30);
+}
+function closePalette() {
+  palette.classList.remove("open");
+  palette.setAttribute("aria-hidden", "true");
+}
+function renderCommands(query) {
+  const commands = [
+    ...Object.entries(apps).map(([id, app]) => ({ id, label: `Open ${app.title}`, hint: "APP" })),
+    { id: "desktop", label: "Show desktop", hint: "SYSTEM" },
+    { id: "theme", label: "Cycle day / night / dark", hint: "SYSTEM" },
+    { id: "email", label: "Copy Zaid Khan's email", hint: "ACTION" },
+  ].filter(item => item.label.toLowerCase().includes(query.toLowerCase()));
+  commandResults.innerHTML = commands.map((item, index) => `<button class="command-result ${index === 0 ? "active" : ""}" type="button" data-command-id="${item.id}"><strong>${item.label}</strong><small>${item.hint}</small></button>`).join("");
+  commandResults.querySelectorAll(".command-result").forEach(button => button.addEventListener("click", () => runCommand(button.dataset.commandId)));
+}
+function runCommand(id) {
+  closePalette();
+  if (apps[id]) openApp(id);
+  else if (id === "desktop") showDesktop();
+  else if (id === "theme") toggleTheme();
+  else if (id === "email") copyText("primecommercewebdevelopment@gmail.com");
+}
+
+function cyclePortrait() {
+  if (!portraitButton || !portraitImage) return;
+  portraitIndex = (portraitIndex + 1) % portraitPoses.length;
+  const pose = portraitPoses[portraitIndex];
+  portraitImage.src = pose.src;
+  portraitButton.querySelector("span").textContent = `PLAYER 01 / ${pose.label}`;
+  portraitButton.classList.add("secret-revealed");
+  document.querySelector("[data-secret-folder]")?.classList.add("revealed");
+  toast("POSE CHANGED", `${pose.label}. A hidden file moved into view.`);
+}
+
+function setDailyMotivation() {
+  const quotes = [
+    "BUILD THE THING YOU KEEP WISHING EXISTED.",
+    "YOUR NEXT CLIENT NEEDS PROOF, NOT ANOTHER PROMISE.",
+    "SHIP THE HARD PART FIRST. POLISH WHAT SURVIVES.",
+    "LEVERAGE BEGINS WHERE REPETITIVE WORK ENDS.",
+    "MAKE THE SYSTEM STRONG ENOUGH TO WORK WITHOUT YOU.",
+    "THE PORTFOLIO IS THE RECEIPT. KEEP SHIPPING.",
+    "CONSISTENCY LOOKS BORING UNTIL IT BECOMES UNFAIR.",
+  ];
+  const today = new Date();
+  const index = Math.floor(today.getTime() / 86400000) % quotes.length;
+  const quote = document.querySelector("[data-motivation-quote]");
+  const date = document.querySelector("[data-motivation-date]");
+  if (quote) quote.textContent = quotes[index];
+  if (date) date.textContent = new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short" }).format(today).toUpperCase();
+}
+
+function bindIdentityMorph() {
+  const label = document.querySelector("[data-identity-morph]");
+  if (!label) return;
+  const identities = ["Zaid Khan OS", "AI SYSTEMS OPERATOR", "VOICE + WEB BUILDER", "Zaid Khan OS"];
+  let index = 0;
+  window.setInterval(() => {
+    label.classList.remove("spring-in");
+    label.classList.add("spring-out");
+    window.setTimeout(() => {
+      index = (index + 1) % identities.length;
+      label.textContent = identities[index];
+      label.classList.remove("spring-out");
+      label.classList.add("spring-in");
+    }, 220);
+  }, 3200);
+}
+
+function bindDesktopArrangement() {
+  const storageKey = "zaid-os-desktop-layout-v1";
+  let layout;
+  try {
+    layout = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    if (!layout || typeof layout !== "object") layout = {};
+  } catch {
+    layout = {};
+  }
+  const save = () => localStorage.setItem(storageKey, JSON.stringify(layout));
+  document.querySelectorAll(".desktop-app[data-open]").forEach(button => {
+    const id = button.dataset.open;
+    const saved = layout[id];
+    if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) {
+      button.style.transform = `translate3d(${saved.x}px, ${saved.y}px, 0)`;
+      button.classList.add("arranged");
+    }
+    let drag = null;
+    let suppressClick = false;
+    button.addEventListener("pointerdown", event => {
+      if (window.innerWidth <= 760 || event.button !== 0) return;
+      const current = layout[id] || { x: 0, y: 0 };
+      drag = { startX: event.clientX, startY: event.clientY, x: current.x, y: current.y, moved: false };
+      button.setPointerCapture(event.pointerId);
+    });
+    button.addEventListener("pointermove", event => {
+      if (!drag) return;
+      const dx = event.clientX - drag.startX;
+      const dy = event.clientY - drag.startY;
+      if (Math.abs(dx) + Math.abs(dy) < 7 && !drag.moved) return;
+      drag.moved = true;
+      const x = Math.max(-520, Math.min(520, drag.x + dx));
+      const y = Math.max(-280, Math.min(470, drag.y + dy));
+      layout[id] = { x, y };
+      button.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      button.classList.add("arranged", "dragging");
+    });
+    const end = () => {
+      if (!drag) return;
+      suppressClick = drag.moved;
+      button.classList.remove("dragging");
+      if (drag.moved) save();
+      drag = null;
+      setTimeout(() => { suppressClick = false; }, 0);
+    };
+    button.addEventListener("pointerup", end);
+    button.addEventListener("pointercancel", end);
+    button.addEventListener("click", event => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }, true);
+  });
+}
+
+function bindMovableWidgets() {
+  const storageKey = "zaid-os-widget-layout-v1";
+  let layout;
+  try {
+    layout = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    if (!layout || typeof layout !== "object") layout = {};
+  } catch {
+    layout = {};
+  }
+  document.querySelectorAll("[data-movable-widget]").forEach(widget => {
+    const id = widget.dataset.movableWidget;
+    const saved = layout[id];
+    if (saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)) widget.style.translate = `${saved.x}px ${saved.y}px`;
+    let drag = null;
+    widget.addEventListener("pointerdown", event => {
+      if (window.innerWidth <= 900 || event.button !== 0 || event.target.closest("button,a,input,textarea")) return;
+      const current = layout[id] || { x: 0, y: 0 };
+      drag = { x: event.clientX, y: event.clientY, left: current.x, top: current.y };
+      widget.setPointerCapture(event.pointerId);
+      widget.classList.add("widget-dragging");
+    });
+    widget.addEventListener("pointermove", event => {
+      if (!drag) return;
+      const x = Math.max(-700, Math.min(700, drag.left + event.clientX - drag.x));
+      const y = Math.max(-500, Math.min(500, drag.top + event.clientY - drag.y));
+      layout[id] = { x, y };
+      widget.style.translate = `${x}px ${y}px`;
+    });
+    const stop = () => {
+      if (!drag) return;
+      drag = null;
+      widget.classList.remove("widget-dragging");
+      localStorage.setItem(storageKey, JSON.stringify(layout));
+    };
+    widget.addEventListener("pointerup", stop);
+    widget.addEventListener("pointercancel", stop);
+  });
+}
+
+if (musicDeck && musicAudio) {
+  const playButton = musicDeck.querySelector("[data-music-play]");
+  const progress = musicDeck.querySelector("[data-music-progress]");
+  const volume = musicDeck.querySelector("[data-music-volume]");
+  const savedVolume = Number(localStorage.getItem("zaid-os-volume") || ".72");
+  musicAudio.volume = Number.isFinite(savedVolume) ? Math.max(0, Math.min(1, savedVolume)) : .72;
+  volume.value = String(musicAudio.volume);
+  playButton.addEventListener("click", toggleMusic);
+  musicDeck.querySelector("[data-music-prev]").addEventListener("click", () => selectMusicTrack(musicIndex - 1, true));
+  musicDeck.querySelector("[data-music-next]").addEventListener("click", () => selectMusicTrack(musicIndex + 1, true));
+  musicDeck.querySelector("[data-music-open]").addEventListener("click", () => openApp("music"));
+  progress.addEventListener("input", () => {
+    if (musicAudio.duration) musicAudio.currentTime = (Number(progress.value) / 1000) * musicAudio.duration;
+  });
+  volume.addEventListener("input", () => {
+    musicAudio.volume = Number(volume.value);
+    localStorage.setItem("zaid-os-volume", String(musicAudio.volume));
+  });
+  musicAudio.addEventListener("timeupdate", () => {
+    progress.value = musicAudio.duration ? String(Math.round((musicAudio.currentTime / musicAudio.duration) * 1000)) : "0";
+  });
+  musicAudio.addEventListener("play", updateMusicDeck);
+  musicAudio.addEventListener("pause", updateMusicDeck);
+  musicAudio.addEventListener("ended", () => selectMusicTrack(musicIndex + 1, true));
+  musicToggle?.addEventListener("click", () => setMusicDeckOpen(true));
+  musicClose?.addEventListener("click", () => setMusicDeckOpen(false));
+  selectMusicTrack(0);
+  setMusicDeckOpen(false);
+}
+
+portraitButton?.addEventListener("click", event => {
+  event.stopPropagation();
+  cyclePortrait();
+});
+
+setDailyMotivation();
+bindIdentityMorph();
+bindDesktopArrangement();
+bindMovableWidgets();
+
+document.addEventListener("click", event => {
+  const opener = event.target.closest("[data-open]");
+  if (opener) openApp(opener.dataset.open);
+  const jumper = event.target.closest("[data-jump]");
+  if (jumper) jumpTo(jumper.dataset.jump);
+  if (event.target.closest("[data-home]")) showDesktop();
+  if (event.target.closest("[data-command]")) openPalette();
+});
+document.querySelector(".boot-skip").addEventListener("click", finishBoot);
+themeButtons.forEach(button => button.addEventListener("click", () => {
+  applyTheme(button.dataset.themeChoice);
+  toast(`${button.dataset.themeChoice.toUpperCase()} MODE`, "Appearance updated and saved.");
+}));
+document.querySelector(".palette-backdrop").addEventListener("click", closePalette);
+commandInput.addEventListener("input", event => renderCommands(event.target.value));
+commandInput.addEventListener("keydown", event => {
+  if (event.key === "Enter") {
+    const first = commandResults.querySelector(".command-result");
+    if (first) runCommand(first.dataset.commandId);
+  }
+});
+document.addEventListener("keydown", event => {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openPalette(); }
+  if (event.key === "Escape") { palette.classList.contains("open") ? closePalette() : closeFocused(); }
+});
+document.querySelector(".sticky")?.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") openApp(event.currentTarget.dataset.open);
+});
+worldPlayer?.addEventListener("click", event => { event.stopPropagation(); waveHello(); });
+worldPlayer?.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    waveHello();
+  }
+});
+window.addEventListener("resize", () => {
+  playerState.waypoint = -1;
+  autoPatrol();
+});
+
+function initDailyTransmission() {
+  const stack = document.querySelector(".motivation-stack");
+  const closeButton = document.querySelector("[data-motivation-close]");
+  if (!stack) return;
+  const todayKey = new Date().toDateString();
+  const dismissedOn = localStorage.getItem("zaid-os-transmission-dismissed");
+  if (dismissedOn === todayKey) {
+    stack.hidden = true;
+    return;
+  }
+  closeButton?.addEventListener("click", event => {
+    event.stopPropagation();
+    localStorage.setItem("zaid-os-transmission-dismissed", todayKey);
+    stack.classList.add("closing");
+    setTimeout(() => { stack.hidden = true; }, 180);
+  });
+}
+initDailyTransmission();
+
+function powerDown(message) {
+  const screen = document.querySelector("#shutdown-screen");
+  const line = screen.querySelector("[data-shutdown-line]");
+  const power = screen.querySelector("[data-power-on]");
+  screen.hidden = false;
+  document.body.classList.add("crt-off");
+  line.textContent = message || "Zaid Khan OS is shutting down...";
+  power.hidden = true;
+  setTimeout(() => {
+    line.textContent = "It is now safe to turn off your founder.";
+    power.hidden = false;
+  }, 1600);
+}
+
+function initSystemMenu() {
+  const brandButton = document.querySelector("[data-brand-menu]");
+  const dropdown = document.querySelector("[data-brand-dropdown]");
+  if (!brandButton || !dropdown) return;
+  const closeMenu = () => { dropdown.hidden = true; brandButton.setAttribute("aria-expanded", "false"); };
+  brandButton.addEventListener("click", event => {
+    event.stopPropagation();
+    const willOpen = dropdown.hidden;
+    dropdown.hidden = !willOpen;
+    brandButton.setAttribute("aria-expanded", String(willOpen));
+  });
+  document.addEventListener("click", event => {
+    if (!event.target.closest(".brand-cluster")) closeMenu();
+  });
+  dropdown.addEventListener("click", event => {
+    if (event.target.closest("button")) closeMenu();
+  });
+  document.querySelector("[data-system-restart]")?.addEventListener("click", () => {
+    toast("SYSTEM RESTART", "Rebooting Zaid Khan OS...");
+    setTimeout(() => window.location.reload(), 700);
+  });
+  document.querySelector("[data-system-shutdown]")?.addEventListener("click", () => powerDown());
+  document.querySelector("[data-power-on]")?.addEventListener("click", () => window.location.reload());
+  document.querySelector("[data-transmission-open]")?.addEventListener("click", () => {
+    const stack = document.querySelector(".motivation-stack");
+    if (!stack) return;
+    localStorage.removeItem("zaid-os-transmission-dismissed");
+    stack.classList.remove("closing");
+    stack.hidden = false;
+    toast("DAILY TRANSMISSION", "Back on the desk.");
+  });
+}
+initSystemMenu();
+
+function initKonami() {
+  const code = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+  let pos = 0;
+  window.addEventListener("keydown", event => {
+    const key = event.key.length === 1 ? event.key.toLowerCase() : event.key;
+    if (key === code[pos]) {
+      pos += 1;
+      if (pos === code.length) {
+        pos = 0;
+        toast("CHEAT CODE ACCEPTED", "You found Founder Run. Now dodge everything real life throws at you.");
+        openApp("run");
+      }
+    } else {
+      pos = key === code[0] ? 1 : 0;
+    }
+  });
+}
+initKonami();
+
+function initModeToggle() {
+  const button = document.querySelector("[data-mode-toggle]");
+  const label = document.querySelector("[data-mode-label]");
+  if (!button) return;
+  const stored = localStorage.getItem("zaid-os-mode");
+  const startDark = stored === "dark";
+  if (startDark) applyTheme("dark");
+  if (label) label.textContent = startDark ? "LIGHT" : "DARK";
+  button.addEventListener("click", () => {
+    const goingDark = os.dataset.theme !== "dark";
+    applyTheme(goingDark ? "dark" : "day");
+    localStorage.setItem("zaid-os-mode", goingDark ? "dark" : "day");
+    if (label) label.textContent = goingDark ? "LIGHT" : "DARK";
+  });
+}
+initModeToggle();
+
+function initWallpaperRotator() {
+  const rotator = document.querySelector("[data-wallpaper-rotator]");
+  if (!rotator) return;
+  const layers = [...rotator.querySelectorAll("[data-wallpaper-layer]")];
+  // all 4 video wallpapers rotate together, regardless of day/night theme —
+  // the previous light/dark split silently dropped deep-space out of rotation on the
+  // default (light) theme, which read as "the space video never shows up"
+  const set = ["cotton-candy-dawn", "anime-sky", "deep-space", "founder-window"];
+  const base = "./assets/wallpapers/";
+  const V = "?v=vid3";                      // cache-bust (1080p re-encode)
+  const noFlip = { "founder-window": true }; // keeps its natural orientation
+  // swap only fires the cross-fade once the incoming video can actually paint a frame,
+  // so a slow-loading video never leaves a blank/transparent layer flashing the pink fallback
+  const setLayer = (layer, name, onReady) => {
+    const existing = layer.querySelector("video");
+    if (existing) existing.remove();
+    layer.style.backgroundImage = "";
+    const v = document.createElement("video");
+    v.className = "wallpaper-video is-active" + (noFlip[name] ? " no-flip" : "");
+    v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true;
+    v.preload = "auto";
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+    v.src = `${base}${name}.mp4${V}`;
+    layer.appendChild(v);
+    const fire = () => { v.play().catch(() => {}); onReady && onReady(); };
+    if (v.readyState >= 2) fire();
+    else v.addEventListener("canplay", fire, { once: true });
+  };
+  let index = 0;
+  let activeLayer = 0;
+  setLayer(layers[0], set[0], () => rotator.classList.add("wallpaper-on"));
+  const advance = () => {
+    index = (index + 1) % set.length;
+    const next = (activeLayer + 1) % 2;
+    setLayer(layers[next], set[index], () => {
+      layers[next].classList.add("is-active");
+      layers[activeLayer].classList.remove("is-active");
+      activeLayer = next;
+    });
+  };
+  setInterval(advance, 40000);
+}
+initWallpaperRotator();
+
+function initDockAutoHide() {
+  const dock = document.querySelector(".dock");
+  if (!dock) return;
+  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+  if (!hasFinePointer || window.innerWidth <= 760) return;
+  dock.classList.add("dock-hoverable");
+  let hideTimer;
+  const reveal = () => {
+    dock.classList.add("dock-visible");
+    clearTimeout(hideTimer);
+  };
+  const scheduleHide = () => {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => dock.classList.remove("dock-visible"), 600);
+  };
+  window.addEventListener("mousemove", event => {
+    if (window.innerHeight - event.clientY < 64) reveal();
+    else if (!dock.matches(":hover")) scheduleHide();
+  });
+  dock.addEventListener("mouseenter", reveal);
+  dock.addEventListener("mouseleave", scheduleHide);
+  reveal();
+  scheduleHide();
+}
+initDockAutoHide();
+
+function updateClock() {
+  const now = new Date();
+  document.querySelector("#clock").textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
+  document.querySelector("#date").textContent = now.toLocaleDateString([], { day: "2-digit", month: "short" }).toUpperCase();
+  const zone = Intl.DateTimeFormat([], { timeZoneName: "short" }).formatToParts(now).find(part => part.type === "timeZoneName");
+  document.querySelector("#timezone").textContent = zone ? zone.value.toUpperCase() : "LOCAL";
+}
+updateClock();
+applyTheme(localStorage.getItem("zaid-os-mode") === "dark" ? "dark" : "day");
+syncWorld();
+setInterval(updateClock, 30000);
+runBootSequence();
+
+function runBootSequence() {
+  const console = document.querySelector("[data-boot-console]");
+  const bar = document.querySelector("[data-boot-bar]");
+  const pctEl = document.querySelector("[data-boot-pct]");
+  const statusEl = document.querySelector("[data-boot-status]");
+  if (!console || !bar) { setTimeout(finishBoot, 2200); return; }
+  const steps = [
+    { at: 8, log: "> mounting /projects ................ ok", status: "loading the receipts..." },
+    { at: 22, log: "> mounting /case-files ............. ok", status: "opening the case files..." },
+    { at: 38, log: "> loading client-videos ........... ok", status: "cueing the proof..." },
+    { at: 52, log: "> booting ai-voice-agent .......... ok", status: "waking the voice agent..." },
+    { at: 66, log: "> scanning for scammers ........... 2 found, blocked", status: "building since 2021..." },
+    { at: 80, log: "> loading founder-personality ..... 100%", status: "installing personality..." },
+    { at: 92, log: "> checking coffee levels .......... critical", status: "ignoring coffee warning..." },
+    { at: 100, log: "> Zaid Khan OS v5.5 .............. ONLINE", status: "we are live." },
+  ];
+  let pct = 0;
+  let stepIndex = 0;
+  const cursor = document.createElement("p");
+  cursor.className = "boot-cursor";
+  cursor.textContent = "root@zaidos:~$ ";
+  const tick = () => {
+    if (booted) return;
+    pct = Math.min(100, pct + (2 + Math.random() * 5));
+    const shown = Math.round(pct);
+    bar.style.width = `${shown}%`;
+    if (pctEl) pctEl.textContent = `${shown}%`;
+    while (stepIndex < steps.length && shown >= steps[stepIndex].at) {
+      const step = steps[stepIndex];
+      const line = document.createElement("p");
+      line.className = "boot-log-line" + (step.at === 100 ? " boot-log-final" : "");
+      line.innerHTML = step.log.replace(/(ok|ONLINE|100%|blocked)/g, "<b>$1</b>");
+      console.insertBefore(line, cursor);
+      if (statusEl) statusEl.textContent = step.status;
+      console.scrollTop = console.scrollHeight;
+      stepIndex += 1;
+    }
+    if (shown >= 100) { setTimeout(finishBoot, 520); return; }
+    setTimeout(tick, 130 + Math.random() * 120);
+  };
+  console.appendChild(cursor);
+  setTimeout(tick, 260);
+}
